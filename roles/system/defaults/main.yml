@@ -1,0 +1,15 @@
+---
+
+dwm_repo: "https://github.com/easilok/dwm"
+
+# dwmblocks_repo: "https://github.com/easilok/dwmblocks"
+dwmblocks_repo: "https://gitlab.com/easilok/dwmblocks"
+
+# dmenu_repo: "https://github.com/easilok/dmenu"
+dmenu_repo: "https://gitlab.com/easilok/dmenu"
+
+home_path: "/home/{{ username }}"
+
+dotfiles_path: "/home/{{ username }}/git/dotfiles"
+
+nvm_url: "https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh"

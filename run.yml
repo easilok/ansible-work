@@ -1,0 +1,75 @@
+---
+#
+# Tasks and roles for all hosts
+#
+# - hosts: kinemon
+#   gather_facts: no
+
+#   pre_tasks:
+#     - import_tasks: tasks/ssh_juggle_port.yml
+#       tags:
+#         - port
+
+- hosts: chopper
+  gather_facts: no
+  pre_tasks:
+    - include_vars:
+        dir: group_vars/chopper
+        depth: 1
+    - import_tasks: tasks/ssh_juggle_port.yml
+      tags:
+        - port
+
+- hosts: chopper
+  become: yes
+  roles:
+    #
+    # Basics
+    #
+    - role: system
+      tags:
+        - system
+
+    - role: docker
+      tags:
+        - docker
+
+    # Use auto script
+    # - role: nix
+    #   tags: 
+    #     - system
+    #     - package
+    #   when: enable_nix | default(False)
+
+    #
+    # Security
+    #
+    - role: security/fail2ban
+      tags:
+      - fail2ban
+
+    - role: security/iptables
+      tags:
+      - iptables
+      when: enable_iptables
+
+    # - role: geerlingguy.security
+    #   tags:
+    #     - security
+    #
+    # System
+    #
+    - role: containers/system/portainer
+      become: no
+      tags:
+        - containers
+      when: enable_portainer | default(False)
+    #
+    # Virtualization
+    #
+    - role: virtualization
+      become: yes
+      tags:
+        - virtualization
+        - system
+      when: enable_virtualization | default(False)

@@ -1,0 +1,47 @@
+---
+- name: Setup Adobe Source Code Pro font
+  vars: 
+    folder_name: "scp"
+    folder_path: "/usr/share/fonts/opentype/scp"
+  block:
+  - name: Check if the Source Code Pro exists already
+    stat:
+      path: "{{ folder_path }}"
+    register: font_data
+  - name: Install adobe source code pro
+    when: not font_data.stat.exists
+    git:
+      repo: "https://github.com/adobe-fonts/source-code-pro.git"
+      dest: "{{ folder_path }}"
+      recursive: no
+      force: yes
+
+- name: Setup Iosevka Aile font
+  vars: 
+    folder_name: "iosevka-aile"
+    folder_path: "/usr/share/fonts/truetype/iosevka-aile"
+  block:
+  - name: Check if the Iosevka Aile exists already
+    stat:
+      path: "{{ folder_path }}"
+    register: font_data
+  - name: Ensure Iosevka Aile folder exists
+    when: not font_data.stat.exists
+    file:
+      dest: "{{ folder_path }}"
+      state: directory
+      owner: "root"
+      group: "root"
+      recurse: yes
+  - name: Download Iosevka font
+    when: not font_data.stat.exists
+    get_url:
+      url: "https://github.com/be5invis/Iosevka/releases/download/v15.2.0/super-ttc-iosevka-aile-15.2.0.zip"
+      dest: "/tmp/iosevka-aile.zip"
+  - name: Install Iosevka font
+    when: not font_data.stat.exists
+    become: yes
+    unarchive:
+      src:  "/tmp/iosevka-aile.zip"
+      dest: "{{ folder_path }}"
+      remote_src: yes

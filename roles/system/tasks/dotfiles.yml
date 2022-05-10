@@ -1,0 +1,221 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+- name: Clone the latest dotfiles repo
+  become: no
+  git:
+    repo: "{{ dotfiles_repo }}"
+    dest: "{{ dotfiles_path }}"
+    # recursive: no
+    # force: yes
+
+# Link folders
+- name: Link dotfiles
+  become: no
+  block:
+    - name: Ensure local/bin directory
+      file:
+        dest: "{{ home_path }}/.local/bin"
+        state: directory
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        recurse: yes
+    - name: Setting default terminal
+      become: yes
+      file:
+        src: "{{ default_terminal_path }}"
+        dest: "/usr/bin/default_terminal"
+        state: link
+    - name: Link bspwm config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/bspwm"
+        dest: "{{ home_path }}/.config/bspwm"
+        state: link
+    - name: Link sxhkd config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/sxhkd"
+        dest: "{{ home_path }}/.config/sxhkd"
+        state: link
+    - name: Link rofi config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/rofi"
+        dest: "{{ home_path }}/.config/rofi"
+        state: link
+    - name: Link polybar config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/polybar"
+        dest: "{{ home_path }}/.config/polybar"
+        state: link
+    - name: Link Dunst config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/dunst"
+        dest: "{{ home_path }}/.config/dunst"
+        state: link
+    - name: Link emacs config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/emacs.d.raw"
+        dest: "{{ home_path }}/.emacs.d"
+        state: link
+    - name: Link scripts folder
+      file:
+        src:  "{{ dotfiles_path }}/home/scripts"
+        dest: "{{ home_path }}/scripts"
+        state: link
+    - name: Link zsh config
+      file:
+        src:  "{{ dotfiles_path }}/home/.zshrc"
+        dest: "{{ home_path }}/.zshrc"
+        state: link
+    - name: Link zsh folder
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/zsh"
+        dest: "{{ home_path }}/.config/zsh"
+        state: link
+    - name: Link tmux config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/tmux/tmux.conf"
+        dest: "{{ home_path }}/.tmux.conf"
+        state: link
+    - name: Link lf config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/lf"
+        dest: "{{ home_path }}/.config/lf"
+        state: link
+    - name: Link picom config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/picom"
+        dest: "{{ home_path }}/.config/picom"
+        state: link
+    - name: Link alacritty config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/alacritty"
+        dest: "{{ home_path }}/.config/alacritty"
+        state: link
+    - name: Link qutebrowser config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/qutebrowser"
+        dest: "{{ home_path }}/.config/qutebrowser"
+        state: link
+
+- name: Setup neomutt config
+  become: no
+  block:
+    - name: Creates neomutt config folder
+      file:
+        dest: "{{ home_path }}/.config/neomutt"
+        state: directory
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        recurse: yes
+    - name: Gathers all neomutt config files
+      find:
+        paths:  "{{ dotfiles_path }}/home/.config/neomutt/"
+        file_type: "any"
+      register: neomutt_files
+    - name: Link all neomutt config files
+      file:
+        src: "{{ item.path }}"
+        dest: "{{ home_path }}/.config/neomutt/{{ item.path | basename }}"
+        state: link
+      with_items: "{{ neomutt_files.files }}"
+
+- name: Setup git config
+  become: no
+  block:
+    - name: Link git config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/git/{{ item }}"
+        dest: "{{ home_path }}/{{ item }}"
+        state: link
+      with_items:
+        - ".gitconfig"
+        - ".gitignore"
+    - name: Gathers all git scripts
+      find:
+        paths:  "{{ dotfiles_path }}/home/scripts/git/"
+        # file_type: "any"
+      register: git_scripts
+    - name: Link all git scripts
+      file:
+        src: "{{ item.path }}"
+        dest: "{{ home_path }}/.local/bin/{{ item.path | basename }}"
+        state: link
+      with_items: "{{ git_scripts.files }}"
+
+- name: Setup dmenu scripts
+  become: no
+  block:
+  - name: Link dmenu config folder
+    file:
+      src:  "{{ dotfiles_path }}/home/.config/dmenu"
+      dest: "{{ home_path }}/.config/dmenu"
+      state: link
+  - name: Gathers all dmenu script files
+    find:
+      paths:  "{{ dotfiles_path }}/home/.config/dmenu/scripts"
+      # file_type: "any"
+    register: dmenu_script_files
+  - name: Link scripts
+    file:
+      src: "{{ item.path }}"
+      dest: "{{ home_path }}/.local/bin/{{ item.path | basename }}"
+      state: link
+    with_items: "{{ dmenu_script_files.files }}"
+
+- name: Setup vim/nvim
+  become: no
+  block:
+    - name: Ensure .vim folder
+      file:
+        dest: "{{ home_path }}/.vim"
+        state: directory
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        recurse: yes
+    - name: Ensure nvim folder
+      file:
+        dest: "{{ home_path }}/.config/nvim"
+        state: directory
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        recurse: yes
+    - name: Install Vundle
+      git:
+        repo: "https://github.com/VundleVim/Vundle.vim.git"
+        dest: "{{ home_path }}/.vim/bundle/Vundle.vim"
+        
+    - name: Link vimrc
+      file:
+        src: "{{ dotfiles_path }}/home/.vimrc"
+        dest: "{{ home_path }}/.vimrc"
+        state: link
+    - name: Link nvim init.vim
+      file:
+        src: "{{ dotfiles_path }}/home/.vimrc"
+        dest: "{{ home_path }}/.config/nvim/init.vim"
+        state: link
+    - name: Gathers all vim files
+      find:
+        paths:  "{{ dotfiles_path }}/home/.config/vim/"
+        file_type: "any"
+      register: vim_files
+    - name: Link all vim files
+      file:
+        src: "{{ item.path }}"
+        dest: "{{ home_path }}/.vim/{{ item.path | basename }}"
+        state: link
+      with_items: "{{ vim_files.files }}"
+    - name: Gathers all nvim files
+      find:
+        paths:  "{{ dotfiles_path }}/home/.config/nvim/"
+        file_type: "any"
+      register: nvim_files
+    - name: Link all nvim files
+      file:
+        src: "{{ item.path }}"
+        dest: "{{ home_path }}/.config/nvim/{{ item.path | basename }}"
+        state: link
+      with_items: "{{ nvim_files.files }}"
+    
+    

@@ -1,0 +1,109 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+- name: Install required system packages
+  package:
+    state: present
+    name: "{{ docker_deps }}"
+
+# Ubuntu
+- name: Install Docker (Ubuntu)
+  when: ansible_facts['distribution'] == 'Ubuntu'
+  block:
+  - name: Add Docker GPG apt Key (Ubuntu)
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker Repository (Ubuntu)
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu impish stable
+      state: present
+
+# Linux mint
+- name: Install Docker (Mint)
+  when: ansible_facts['distribution'] == 'Linux Mint'
+  block:
+  - name: Add Docker GPG apt Key (Mint)
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker Repository (Mint)
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu focal stable
+      state: present
+
+- name: Update apt and install docker-ce
+  when: ansible_facts['os_family'] == 'Debian'
+  apt:
+    update_cache: yes
+    name: "{{ docker_packages }}"
+    state: present
+
+- name: Ensure group docker exists
+  group:
+    name: docker
+    state: present
+
+- name: Add user "{{ username }}" to group docker
+  user:
+    name: '{{ username }}'
+    groups:
+      - docker
+    append: yes
+
+# - name: Install Docker Module for Python
+#   pip:
+#     name: docker
+
+- name: Make sure Docker is running and enabled
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Ensure no docker-compose installed to fetch script
+  package:
+    state: absent
+    name: "docker-compose"
+
+- name: Install docker-compose binary
+  become: yes
+  get_url:
+    url: "{{ docker_compose_url }}"
+    dest: "/usr/bin/docker-compose"
+    mode: 0665
+
+- name: Get a list of containers
+  delegate_to: localhost
+  become: no
+  find:
+    paths:
+      - "roles/containers/system"
+    file_type: directory
+    recurse: no
+  register: containers
+
+- name: Make sure docker data exists
+  become: yes
+  file:
+    dest: "{{ docker_dir }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    recurse: yes
+
+# - name: Handler enabled containers backup data
+#   include_tasks: 
+#     file: restore.yml 
+#     apply:
+#       vars:
+#         container_name: "{{ item.path.split('/')[-1] }}"
+#   when: "(enable_nas_stuff | default(False)) and lookup('vars', 'enable_' + item.path.split('/')[-1])"
+#   with_items: "{{ containers.files }}"
+
+- name: Create reverse proxy network.
+  docker_network:
+    name: '{{ reverse_proxy_net }}'

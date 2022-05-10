@@ -1,0 +1,158 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+  
+- name: Install CLI programs
+  # become: yes
+  package:
+    name: "{{ cli_packages }}"
+    state: present
+
+  # - name: Install nix package manager
+  #   when: enable_nix | default(False)
+
+- name: Install desktop programs
+  # become: yes
+  package:
+    name: "{{ desktop_packages }}"
+    state: present
+
+- name: Install utilities
+  # become: yes
+  package:
+    name: "{{ utilities_packages }}"
+    state: present
+
+- name: Install dev programs
+  # become: yes
+  package:
+    name: "{{ dev_packages }}"
+    state: present
+
+- name: Check microsoft teams
+  debug:
+    msg: "Microsoft teams is already installed"
+  when: "ms_teams_package_name in ansible_facts.packages"
+  
+- name: Setup microsoft teams
+  when: "ms_teams_package_name not in ansible_facts.packages"
+  block:
+  - name: Download microsoft teams
+    get_url:
+      url: "{{ ms_teams_url }}"
+      dest: "/tmp/ms_teams.deb"
+  - name: Install teams
+    apt:
+      deb: "/tmp/ms_teams.deb"
+
+- name: Check Visual Studio Code
+  debug:
+    msg: "Visual Studio Code is already installed"
+  when: "vscode_package_name in ansible_facts.packages"
+
+- name: Setup microsoft vscode
+  when: "vscode_package_name not in ansible_facts.packages"
+  block:
+  - name: Download vscode
+    get_url:
+      url: "{{ vscode_url }}"
+      dest: "/tmp/vscode.deb"
+  - name: Install vscode
+    apt:
+      deb: "/tmp/vscode.deb"
+
+- name: Install flatpak
+  when: enable_flatpak | default (false)
+  package:
+    name: "{{ flatpak_packages }}"
+    state: present
+    
+- name: Setup dwm and dwmblocks
+  become: no
+  when: enable_dwm | default(False)
+  block:
+    - name: Clone dwm personal build
+      git:
+        repo: "{{ dwm_repo }}"
+        dest: "/home/{{ username }}/git/dwm"
+        # force: yes
+        version: "integration6.3"
+    - name: Clone dwmblocks personal build
+      git:
+        repo: "{{ dwmblocks_repo }}"
+        dest: "/home/{{ username }}/git/dwmblocks"
+        # force: yes
+    - name: Install dwmblocks
+      become: yes
+      community.general.make:
+        chdir:  "/home/{{ username }}/git/dwmblocks"
+        target: install
+    - name: Install dwm
+      become: yes
+      community.general.make:
+        chdir:  "/home/{{ username }}/git/dwm"
+        target: install
+    - name: Install dwm autorun
+      become: yes
+      file:
+        src:  "/home/{{ username }}/git/dwm/dwm_autorun.sh"
+        dest: "/usr/local/bin/dwm_autorun.sh"
+        state: link
+    - name: Install the xsession file
+      become: yes
+      template:
+        src: "dwm.desktop.j2"
+        dest: "/usr/share/xsessions/dwm.desktop"
+        mode: 0644
+        owner: root
+        group: root
+
+- name: Setup dmenu 
+  become: no
+  block:
+    - name: Clone dmenu personal build
+      git:
+        repo: "{{ dmenu_repo }}"
+        dest: "/home/{{ username }}/git/dmenu"
+        # force: yes
+    - name: Install dmenu
+      community.general.make:
+        chdir:  "/home/{{ username }}/git/dmenu"
+        target: install
+      become: yes
+
+- name: Install fonts
+  become: yes
+  notify: Update font cache
+  block:
+    - name: Ensure Fonts opentype directory
+      file:
+        dest: "/usr/share/fonts/opentype"
+        state: directory
+        owner: "root"
+        group: "root"
+        recurse: yes
+    - name: Ensure Fonts truetype directory
+      file:
+        dest: "/usr/share/fonts/truetype"
+        state: directory
+        owner: "root"
+        group: "root"
+        recurse: yes
+    - name: Setup and install font list
+      include_tasks: 
+        file: fonts.yml 
+
+# - name: Install st terminal
+
+- name: Setup NVM/NodeJs
+  become: no
+  block:
+    - name: Download nvm install Script
+      get_url:
+        url: "{{ nvm_url }}"
+        dest: "/tmp/nvm_install.sh"
+    - name: Install nvm
+      shell:
+        cmd: "bash /tmp/nvm_install.sh"

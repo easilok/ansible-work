@@ -1,0 +1,69 @@
+---
+cli_packages:
+  - htop
+  - neomutt
+  - vim
+  - git
+  - tmux
+  - pass
+
+desktop_packages:
+  - bspwm
+  - sxhkd
+  - dunst
+  - rofi
+  - thunderbird
+  - thunderbird-locale-pt
+  - firefox
+  - qutebrowser
+  - chromium
+  - nextcloud-desktop
+  - flameshot
+  - pcmanfm
+  - xfce4-clipman
+  - xfce4-clipman-plugin
+  - xsettingsd
+  - compton
+  - lxpolkit
+  - nitrogen
+  - feh
+  - ristretto
+  - wmname
+  - numlockx
+  - xss-lock
+  - i3lock-fancy
+  # - polybar # Enable this on ubuntu. On mint must be installed with nix
+  - lxappearance
+
+utilities_packages:
+  - rsync
+  - build-essential
+  - libx11-dev
+  - libxinerama-dev 
+  - libxft-dev
+  - libx11-xcb-dev
+  - fonts-firacode
+  - fonts-cantarell
+  - fonts-hack
+  - zsh
+
+dev_packages:
+  - emacs
+  # - neovim # Installed with nix to get a more recent version
+  # - nvm
+
+flatpak_packages:
+  - flatpak
+  - flatpak-xdg-utils
+  - xdg-desktop-portal
+  - xdg-desktop-portal-gtk
+    
+ms_teams_url: "https://go.microsoft.com/fwlink/p/?LinkID=2112886&clcid=0x4809&culture=en-sg&country=SG"
+
+ms_teams_package_name: "teams"
+
+vscode_url: "https://az764295.vo.msecnd.net/stable/57fd6d0195bb9b9d1b49f6da5db789060795de47/code_1.67.0-1651667246_amd64.deb"
+
+vscode_package_name: "code"
+
+default_terminal_path: "/usr/bin/xfce4-terminal"
