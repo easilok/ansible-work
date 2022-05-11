@@ -67,7 +67,7 @@ msmtp_domain: "{{ email.split('@')[1] }}"
 #
 # SSH (geerlingguy.security)
 #
-security_ssh_port: 69
+security_ssh_port: '69'
 # security_ssh_port: 22
 
 # security_sudoers_passwordless: [ "{{ username }}" ]

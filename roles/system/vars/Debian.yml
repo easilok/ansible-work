@@ -16,7 +16,8 @@ desktop_packages:
   - thunderbird-locale-pt
   - firefox
   - qutebrowser
-  - chromium
+  # - chromium # this is for linux mint
+  - chromium-browser # this is for ubuntu
   - nextcloud-desktop
   - flameshot
   - pcmanfm
@@ -34,6 +35,9 @@ desktop_packages:
   - i3lock-fancy
   # - polybar # Enable this on ubuntu. On mint must be installed with nix
   - lxappearance
+  - arc-theme
+  - faenza-icon-theme
+  - obsidian-icon-theme
 
 utilities_packages:
   - rsync
@@ -45,6 +49,13 @@ utilities_packages:
   - fonts-firacode
   - fonts-cantarell
   - fonts-hack
+  - fonts-noto
+  - fonts-noto-color-emoji
+  - fonts-font-awesome
+  - fonts-ibm-plex
+  - fonts-roboto
+  - fonts-dejavu
+  # - ttf-mscorefonts-installer
   - zsh
 
 dev_packages:

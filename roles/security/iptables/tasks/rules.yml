@@ -31,6 +31,11 @@
     jump: ACCEPT
     comment: Ansible managed
 
+- name: Define ansible_ssh_port when in local
+  set_fact:
+    ansible_ssh_port: "{{ security_ssh_port }}"
+  when: ansible_connection == 'local'
+
 - name: Allow current port 22 ssh connection
   iptables:
     chain: INPUT
