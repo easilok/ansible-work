@@ -33,7 +33,7 @@ desktop_packages:
   - numlockx
   - xss-lock
   - i3lock-fancy
-  # - polybar # Enable this on ubuntu. On mint must be installed with nix
+  - polybar # Enable this on ubuntu. On mint must be installed with nix
   - lxappearance
   - arc-theme
   - faenza-icon-theme
@@ -78,3 +78,4 @@ vscode_url: "https://az764295.vo.msecnd.net/stable/57fd6d0195bb9b9d1b49f6da5db78
 vscode_package_name: "code"
 
 default_terminal_path: "/usr/bin/xfce4-terminal"
+# default_terminal_path: "/usr/bin/gnome-terminal"
