@@ -90,6 +90,8 @@ security_autoupdate_reboot_time: "01:00"
 #
 enable_nas_stuff: true
 
+enable_extra_packages: false
+
 enable_dwm: true
 
 enable_nix: false
@@ -147,7 +149,7 @@ storage_drive: /mnt/stuff
 #
 enable_crowdsec: false
 
-enable_iptables: true
+enable_iptables: false
 
 enable_fail2ban: true
 

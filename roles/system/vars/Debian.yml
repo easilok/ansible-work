@@ -6,6 +6,9 @@ cli_packages:
   - git
   - tmux
   - pass
+  - wget
+  - curl
+  - mlocate
 
 desktop_packages:
   - bspwm
@@ -24,11 +27,13 @@ desktop_packages:
   - xfce4-clipman
   - xfce4-clipman-plugin
   - xsettingsd
-  - compton
+  # - compton
+  - picom
   - lxpolkit
   - nitrogen
   - feh
   - ristretto
+  - tumbler
   - wmname
   - numlockx
   - xss-lock
@@ -55,14 +60,53 @@ utilities_packages:
   - fonts-ibm-plex
   - fonts-roboto
   - fonts-dejavu
+  - fontconfig
   # - ttf-mscorefonts-installer
   - zsh
+  - zsh-syntax-highlighting
+  - zsh-autosuggestions
+  - fzf
+  - exa
+  - sxiv
 
 dev_packages:
   - emacs
   # - neovim # Installed with nix to get a more recent version
   # - nvm
 
+extra_packages:
+  - isync
+  - arandr
+  - exuberant-ctags
+  - remmina
+  - remmina-plugin-rdp
+  - xsel
+  - speedcrunch
+  - xwallpaper
+  - dbeaver
+  - gnumeric
+  - inkscape
+  - mpv
+  - xarchiver
+  - zathura
+  - evince
+  - libreoffice
+  - hyphen-pt-pt
+  - libreoffice-l10n-pt
+  - leafpad
+  - pinta
+  - terminator
+  # - rdesktop
+  # - youtube-dl
+  # - transmission-gtk
+  # - alacritty # does not exist
+  # - postman # does not exist
+
+latex_packages:
+  # - texlive-full # 6GB package install
+  - texlive
+  - texlive-lang-portuguese
+  
 flatpak_packages:
   - flatpak
   - flatpak-xdg-utils
@@ -79,3 +123,7 @@ vscode_package_name: "code"
 
 default_terminal_path: "/usr/bin/xfce4-terminal"
 # default_terminal_path: "/usr/bin/gnome-terminal"
+
+dbeaver_url: "https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb"
+
+dbeaver_package_name: "dbeaver"

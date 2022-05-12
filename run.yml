@@ -10,17 +10,18 @@
 #       tags:
 #         - port
 
-- hosts: chopper
+- hosts: workstation
   gather_facts: no
   pre_tasks:
     - include_vars:
         dir: group_vars/chopper
         depth: 1
     - import_tasks: tasks/ssh_juggle_port.yml
+      when: ansible_connection != 'local'
       tags:
         - port
 
-- hosts: chopper
+- hosts: workstation
   become: yes
   roles:
     #

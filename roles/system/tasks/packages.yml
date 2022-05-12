@@ -62,6 +62,17 @@
     apt:
       deb: "/tmp/vscode.deb"
 
+- name: Setup dbeaver
+  when: "dbeaver_package_name not in ansible_facts.packages" and enable_extra_packages
+  block:
+  - name: Download dbeaver
+    get_url:
+      url: "{{ dbeaver_url }}"
+      dest: "/tmp/{{ dbeaver_package_name }}.deb"
+  - name: Install dbeaver
+    apt:
+      deb: "/tmp/{{ dbeaver_package_name }}.deb"
+
 - name: Install flatpak
   when: enable_flatpak | default (false)
   package:
