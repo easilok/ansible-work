@@ -90,13 +90,17 @@ security_autoupdate_reboot_time: "01:00"
 #
 enable_nas_stuff: true
 
+enable_ms_teams: true
+
+enable_vscode: true
+
 enable_extra_packages: false
 
 enable_dwm: true
 
 enable_nix: false
 
-enable_portainer: true
+enable_portainer: false
 
 enable_watchtower: false
 

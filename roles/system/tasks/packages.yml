@@ -33,10 +33,10 @@
 - name: Check microsoft teams
   debug:
     msg: "Microsoft teams is already installed"
-  when: "ms_teams_package_name in ansible_facts.packages"
+  when: ms_teams_package_name in ansible_facts.packages
   
 - name: Setup microsoft teams
-  when: "ms_teams_package_name not in ansible_facts.packages"
+  when: ms_teams_package_name not in ansible_facts.packages and enable_ms_teams
   block:
   - name: Download microsoft teams
     get_url:
@@ -52,7 +52,7 @@
   when: "vscode_package_name in ansible_facts.packages"
 
 - name: Setup microsoft vscode
-  when: "vscode_package_name not in ansible_facts.packages"
+  when: vscode_package_name not in ansible_facts.packages and enable_vscode
   block:
   - name: Download vscode
     get_url:
@@ -62,8 +62,13 @@
     apt:
       deb: "/tmp/vscode.deb"
 
+- name: Check dbeaver
+  debug:
+    msg: "dbeaver is already installed"
+  when: dbeaver_package_name in ansible_facts.packages
+
 - name: Setup dbeaver
-  when: "dbeaver_package_name not in ansible_facts.packages" and enable_extra_packages
+  when: dbeaver_package_name not in ansible_facts.packages and enable_extra_packages
   block:
   - name: Download dbeaver
     get_url:
