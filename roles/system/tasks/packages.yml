@@ -194,3 +194,18 @@
     - name: Install nvm
       shell:
         cmd: "bash /tmp/nvm_install.sh"
+
+- name: Link xfce4-notifyd binary
+  become: yes
+  when: 'xfce4-notifyd' in desktop_packages
+  block:
+    - name: Check if xfce4-notifyd binary exists
+      stat:
+        path: "{{ xfce4_notifyd_path }}"
+      register: xfce4_notifyd_data
+    - name: Link xfce4-notifyd binary
+      file:
+        src:  "{{ xfce4_notifyd_path }}"
+        dest: "/usr/local/bin/xfce4_notifyd_data"
+        state: link
+        

@@ -13,7 +13,8 @@ cli_packages:
 desktop_packages:
   - bspwm
   - sxhkd
-  - dunst
+  # - dunst # Replace with xfce4-notifyd
+  - xfce4-notifyd
   - rofi
   - thunderbird
   - thunderbird-locale-pt
@@ -27,8 +28,8 @@ desktop_packages:
   - xfce4-clipman
   - xfce4-clipman-plugin
   - xsettingsd
-  # - compton
-  - picom
+  # - compton # this is for linux mint
+  - picom # this is for ubuntu
   - lxpolkit
   - nitrogen
   - feh
@@ -66,7 +67,7 @@ utilities_packages:
   - zsh-syntax-highlighting
   - zsh-autosuggestions
   - fzf
-  - exa
+  - exa # this does not exist in linux mint
   - sxiv
 
 dev_packages:
@@ -127,3 +128,6 @@ default_terminal_path: "/usr/bin/xfce4-terminal"
 dbeaver_url: "https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb"
 
 dbeaver_package_name: "dbeaver"
+
+xfce4_notifyd_path: "/usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd" # Linux mint && Ubuntu
+# xfce4_notifyd_path: "/usr/lib/xfce4/notifyd/xfce4-notifyd" # Arch Linux
