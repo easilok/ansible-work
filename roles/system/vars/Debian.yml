@@ -20,16 +20,16 @@ desktop_packages:
   - thunderbird-locale-pt
   - firefox
   - qutebrowser
-  # - chromium # this is for linux mint
-  - chromium-browser # this is for ubuntu
+  - chromium # this is for linux mint
+  #- chromium-browser # this is for ubuntu
   - nextcloud-desktop
   - flameshot
   - pcmanfm
   - xfce4-clipman
   - xfce4-clipman-plugin
   - xsettingsd
-  # - compton # this is for linux mint
-  - picom # this is for ubuntu
+  - compton
+    # - picom
   - lxpolkit
   - nitrogen
   - feh
@@ -39,11 +39,12 @@ desktop_packages:
   - numlockx
   - xss-lock
   - i3lock-fancy
-  - polybar # Enable this on ubuntu. On mint must be installed with nix
+    # - polybar # Enable this on ubuntu. On mint must be installed with nix
   - lxappearance
   - arc-theme
   - faenza-icon-theme
   - obsidian-icon-theme
+  - dex
 
 utilities_packages:
   - rsync
@@ -67,7 +68,7 @@ utilities_packages:
   - zsh-syntax-highlighting
   - zsh-autosuggestions
   - fzf
-  - exa # this does not exist in linux mint
+  # - exa
   - sxiv
 
 dev_packages:
