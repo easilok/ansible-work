@@ -180,11 +180,14 @@
         owner: "{{ username }}"
         group: "{{ username }}"
         recurse: yes
-    - name: Install Vundle
-      git:
-        repo: "https://github.com/VundleVim/Vundle.vim.git"
-        dest: "{{ home_path }}/.vim/bundle/Vundle.vim"
-        
+    - name: Install vim-plug for vim
+      get_url:
+        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        dest: "{{ home_path }}/.vim/autoload/plug.vim"
+    - name: Install vim-plug for neovim
+      get_url:
+        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        dest: "{{ home_path }}/.local/share/nvim/site/autoload/plug.vim"
     - name: Link vimrc
       file:
         src: "{{ dotfiles_path }}/home/.vimrc"
@@ -204,6 +207,12 @@
       file:
         src: "{{ item.path }}"
         dest: "{{ home_path }}/.vim/{{ item.path | basename }}"
+        state: link
+      with_items: "{{ vim_files.files }}"
+    - name: Link all vim files in nvim foler
+      file:
+        src: "{{ item.path }}"
+        dest: "{{ home_path }}/.config/nvim/{{ item.path | basename }}"
         state: link
       with_items: "{{ vim_files.files }}"
     - name: Gathers all nvim files
