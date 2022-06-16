@@ -1,0 +1,41 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+- name: Install required prerequisites
+  package:
+    state: present
+    name: "{{ prerequisites }}"
+  tags:
+    - install
+    - neovim
+
+- name: Setup and install neovim
+  become: no
+  tags:
+    - install
+    - neovim
+  block:
+    - name: Ensure git folder exists
+      file:
+        dest: "/home/{{ username }}/git"
+        state: directory
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        recurse: yes
+    - name: Clone neovim repository
+      git:
+        repo: "https://github.com/neovim/neovim"
+        dest: "/home/{{ username }}/git/neovim"
+    - name: Build neovim
+      community.general.make:
+        chdir: "/home/{{ username }}/git/neovim"
+        # target: all
+        params:
+          CMAKE_BUILD_TYPE: "RelWithDebInfo"
+    - name: Install neovim
+      become: yes
+      community.general.make:
+        chdir: "/home/{{ username }}/git/neovim"
+        target: install
+
