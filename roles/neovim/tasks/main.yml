@@ -16,6 +16,10 @@
     - install
     - neovim
   block:
+    - name: Check if home's git folder exist
+      stat:
+        path: "/home/{{ username }}/git"
+      register: home_git_folder
     - name: Ensure git folder exists
       file:
         dest: "/home/{{ username }}/git"
@@ -23,6 +27,7 @@
         owner: "{{ username }}"
         group: "{{ username }}"
         recurse: yes
+      when: not home_git_folder.stat.exists
     - name: Clone neovim repository
       git:
         repo: "https://github.com/neovim/neovim"
@@ -32,6 +37,7 @@
         chdir: "/home/{{ username }}/git/neovim"
         # target: all
         params:
+          NUM_THREADS: 2
           CMAKE_BUILD_TYPE: "RelWithDebInfo"
     - name: Install neovim
       become: yes
