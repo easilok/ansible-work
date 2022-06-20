@@ -8,7 +8,7 @@ if [ "$#" -gt 0 ]; then
     TAGS=$TAGS",$TAG"
   done
 
-  echo "ansible-playbook -K --tags $TAGS run.yml"
+  ansible-playbook -K --tags $TAGS run.yml
 
 else
   ansible-playbook -K run.yml
