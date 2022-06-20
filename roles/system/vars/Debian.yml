@@ -9,6 +9,9 @@ cli_packages:
   - wget
   - curl
   - mlocate
+  - ssh-askpass
+  - exuberant-ctags
+  - bat
 
 desktop_packages:
   - bspwm
@@ -72,8 +75,7 @@ utilities_packages:
   - sxiv
 
 dev_packages:
-  - emacs
-  # - neovim # Installed with nix to get a more recent version
+  # - emacs
   # - nvm
 
 extra_packages:
@@ -98,6 +100,8 @@ extra_packages:
   - leafpad
   - pinta
   - terminator
+  - speedcrunch
+  - gparted
   # - rdesktop
   # - youtube-dl
   # - transmission-gtk
@@ -131,4 +135,3 @@ dbeaver_url: "https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb"
 dbeaver_package_name: "dbeaver"
 
 xfce4_notifyd_path: "/usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd" # Linux mint && Ubuntu
-# xfce4_notifyd_path: "/usr/lib/xfce4/notifyd/xfce4-notifyd" # Arch Linux

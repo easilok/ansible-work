@@ -2,7 +2,15 @@
 
 {
   inherit (pkgs)
+  alacritty
+  bpytop
+  deadbeef
+  emacs
+  exa
+  gotop
   neofetch
-  neovim
-  polybar;
+  joplin
+  joplin-desktop
+  postman
+  # polybar;
 }
