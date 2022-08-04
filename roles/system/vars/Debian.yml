@@ -12,6 +12,7 @@ cli_packages:
   - ssh-askpass
   - exuberant-ctags
   - bat
+  - stow
 
 desktop_packages:
   - bspwm
@@ -48,6 +49,8 @@ desktop_packages:
   - faenza-icon-theme
   - obsidian-icon-theme
   - dex
+  - kitty
+  - spotify-client
 
 utilities_packages:
   - rsync
@@ -73,6 +76,10 @@ utilities_packages:
   - fzf
   # - exa
   - sxiv
+  - dex
+  - playerctl
+  - wireguard
+  - wireguard-tools
 
 dev_packages:
   # - emacs
@@ -102,6 +109,7 @@ extra_packages:
   - terminator
   - speedcrunch
   - gparted
+  # - tlp # disabled because can be a desktop
   # - rdesktop
   # - youtube-dl
   # - transmission-gtk
