@@ -197,9 +197,7 @@
 
 - name: Link xfce4-notifyd binary
   become: yes
-  when: notify_package in desktop_packages
-  vars:
-    notify_package: 'xfce4-notifyd'
+  when: "'xfce4-notifyd' in desktop_packages"
   block:
     - name: Check if xfce4-notifyd binary exists
       stat:
