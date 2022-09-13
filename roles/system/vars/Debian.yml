@@ -24,6 +24,7 @@ desktop_packages:
   - thunderbird-locale-pt
   - firefox
   - qutebrowser
+  #- chromium # this is for linux mint
   - chromium-browser # this is for ubuntu
   - nextcloud-desktop
   - flameshot
@@ -113,7 +114,7 @@ extra_packages:
   # - youtube-dl
   # - transmission-gtk
   # - alacritty # does not exist
-  # - postman # does not exist
+  - postman # does not exist
 
 latex_packages:
   # - texlive-full # 6GB package install
@@ -134,7 +135,7 @@ vscode_url: "https://az764295.vo.msecnd.net/stable/57fd6d0195bb9b9d1b49f6da5db78
 
 vscode_package_name: "code"
 
-default_terminal_path: "/usr/bin/xfce4-terminal"
+default_terminal_path: "/usr/bin/kitty"
 # default_terminal_path: "/usr/bin/gnome-terminal"
 
 dbeaver_url: "https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb"

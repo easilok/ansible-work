@@ -32,6 +32,10 @@
       git:
         repo: "https://github.com/neovim/neovim"
         dest: "/home/{{ username }}/git/neovim"
+    - name: Clean previous neovim build
+      community.general.make:
+        chdir: "/home/{{ username }}/git/neovim"
+        target: distclean
     - name: Build neovim
       community.general.make:
         chdir: "/home/{{ username }}/git/neovim"
