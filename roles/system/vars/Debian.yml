@@ -50,6 +50,7 @@ desktop_packages:
   - obsidian-icon-theme
   - dex
   - kitty
+  - parcellite
 
 utilities_packages:
   - rsync

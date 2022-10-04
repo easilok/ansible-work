@@ -11,6 +11,6 @@
   neofetch
   joplin
   joplin-desktop
-  postman
+  postman;
   # polybar;
 }
