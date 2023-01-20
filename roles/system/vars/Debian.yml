@@ -80,6 +80,7 @@ utilities_packages:
   - playerctl
   - wireguard
   - wireguard-tools
+  - sshfs
 
 dev_packages:
   # - emacs
