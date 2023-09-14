@@ -2,13 +2,13 @@
 - name: Include OS-specific variables
   include_vars: "{{ ansible_facts['os_family'] }}.yml"
 
-- name: Clone the latest dotfiles repo
-  become: no
-  git:
-    repo: "{{ dotfiles_repo }}"
-    dest: "{{ dotfiles_path }}"
-    # recursive: no
-    # force: yes
+    #- name: Clone the latest dotfiles repo
+    #  become: no
+    #  git:
+    #    repo: "{{ dotfiles_repo }}"
+    #    dest: "{{ dotfiles_path }}"
+    #    # recursive: no
+    #    # force: yes
 
 # Link folders
 - name: Link dotfiles
@@ -64,7 +64,7 @@
         state: link
     - name: Link zsh config
       file:
-        src:  "{{ dotfiles_path }}/home/.zshrc"
+        src:  "{{ dotfiles_path }}/home/.config/zsh/raw/.zshrc"
         dest: "{{ home_path }}/.zshrc"
         state: link
     - name: Link zsh folder
@@ -82,10 +82,10 @@
         src:  "{{ dotfiles_path }}/home/.config/lf"
         dest: "{{ home_path }}/.config/lf"
         state: link
-    - name: Link picom config
+    - name: Link compton config
       file:
-        src:  "{{ dotfiles_path }}/home/.config/picom"
-        dest: "{{ home_path }}/.config/picom"
+        src:  "{{ dotfiles_path }}/home/.config/compton.conf"
+        dest: "{{ home_path }}/.config/compton.conf"
         state: link
     - name: Link alacritty config
       file:
@@ -173,13 +173,6 @@
         owner: "{{ username }}"
         group: "{{ username }}"
         recurse: yes
-    - name: Ensure nvim folder
-      file:
-        dest: "{{ home_path }}/.config/nvim"
-        state: directory
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        recurse: yes
     - name: Ensure vim-autoload folder
       file:
         dest: "{{ home_path }}/.vim/autoload"
@@ -191,26 +184,10 @@
       get_url:
         url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         dest: "{{ home_path }}/.vim/autoload/plug.vim"
-    - name: Ensure nvim-autoload folder
-      file:
-        dest: "{{ home_path }}/.local/share/nvim/site/autoload"
-        state: directory
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        recurse: yes
-    - name: Install vim-plug for neovim
-      get_url:
-        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        dest: "{{ home_path }}/.local/share/nvim/site/autoload/plug.vim"
     - name: Link vimrc
       file:
         src: "{{ dotfiles_path }}/home/.vimrc"
         dest: "{{ home_path }}/.vimrc"
-        state: link
-    - name: Link nvim init.vim
-      file:
-        src: "{{ dotfiles_path }}/home/.vimrc"
-        dest: "{{ home_path }}/.config/nvim/init.vim"
         state: link
     - name: Gathers all vim files
       find:
@@ -223,22 +200,23 @@
         dest: "{{ home_path }}/.vim/{{ item.path | basename }}"
         state: link
       with_items: "{{ vim_files.files }}"
-    - name: Link all vim files in nvim foler
+    - name: Ensure nvim-autoload folder
       file:
-        src: "{{ item.path }}"
-        dest: "{{ home_path }}/.config/nvim/{{ item.path | basename }}"
-        state: link
-      with_items: "{{ vim_files.files }}"
-    - name: Gathers all nvim files
-      find:
-        paths:  "{{ dotfiles_path }}/home/.config/nvim/"
-        file_type: "any"
-      register: nvim_files
-    - name: Link all nvim files
-      file:
-        src: "{{ item.path }}"
-        dest: "{{ home_path }}/.config/nvim/{{ item.path | basename }}"
-        state: link
-      with_items: "{{ nvim_files.files }}"
+        dest: "{{ home_path }}/.local/share/nvim/site/autoload"
+        state: directory
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        recurse: yes
+    - name: Install vim-plug for neovim
+      get_url:
+        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        dest: "{{ home_path }}/.local/share/nvim/site/autoload/plug.vim"
+    - name: Run stow on nvim configuration
+      shell:
+        chdir: "{{ dotfiles_path }}"
+        cmd: "stow --target {{ home_path }} --verbose=2 nvim"
+      register: result
+      changed_when: 'result.stderr is search("LINK: ")'
+
     
     

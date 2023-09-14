@@ -1,0 +1,22 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+  
+- name: Install pyenv dependencies
+  become: yes
+  package:
+    name: "{{ pyenv_dependencies }}"
+    state: present
+
+- name: Setup pyenv
+  become: no
+  block:
+    - name: Download pyenv install Script
+      get_url:
+        url: "{{ pyenv_url }}"
+        dest: "/tmp/pyenv.run"
+    - name: Install pyenv
+      shell:
+        cmd: "bash /tmp/pyenv.run"
+

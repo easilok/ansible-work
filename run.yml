@@ -33,8 +33,12 @@
 
     - role: neovim
       tags:
-        - system
         - neovim
+
+    - role: pyenv
+      when: enable_pyenv | default(False)
+      tags:
+        - pyenv
 
     - role: docker
       tags:

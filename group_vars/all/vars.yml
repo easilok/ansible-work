@@ -21,7 +21,7 @@ username: luis
 
 guid: "1000"
 
-shell: /bin/bash
+shell: /bin/zsh
 
 docker_dir: /home/docker
 
@@ -94,7 +94,9 @@ enable_ms_teams: true
 
 enable_vscode: true
 
-enable_extra_packages: false
+enable_extra_packages: true
+
+enable_flatpak: true
 
 enable_dwm: true
 
@@ -110,7 +112,7 @@ enable_prometheus: false
 
 # VPN
 
-enable_wireguard: false
+enable_wireguard: true
 
 # network bridge
 

@@ -30,21 +30,29 @@
     name: "{{ dev_packages }}"
     state: present
 
-- name: Check microsoft teams
-  debug:
-    msg: "Microsoft teams is already installed"
-  when: ms_teams_package_name in ansible_facts.packages
-  
-- name: Setup microsoft teams
-  when: ms_teams_package_name not in ansible_facts.packages and enable_ms_teams
-  block:
-  - name: Download microsoft teams
-    get_url:
-      url: "{{ ms_teams_url }}"
-      dest: "/tmp/ms_teams.deb"
-  - name: Install teams
-    apt:
-      deb: "/tmp/ms_teams.deb"
+- name: Install extra packages
+  # become: yes
+  package:
+    name: "{{ extra_packages }}"
+    state: present
+  when: enable_extra_packages
+
+      # Teams is not available anymore
+#- name: Check microsoft teams
+#  debug:
+#    msg: "Microsoft teams is already installed"
+#  when: ms_teams_package_name in ansible_facts.packages
+#  
+#- name: Setup microsoft teams
+#  when: ms_teams_package_name not in ansible_facts.packages and enable_ms_teams
+#  block:
+#  - name: Download microsoft teams
+#    get_url:
+#      url: "{{ ms_teams_url }}"
+#      dest: "/tmp/ms_teams.deb"
+#  - name: Install teams
+#    apt:
+#      deb: "/tmp/ms_teams.deb"
 
 - name: Check Visual Studio Code
   debug:

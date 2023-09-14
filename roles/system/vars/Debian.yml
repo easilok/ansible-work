@@ -13,18 +13,18 @@ cli_packages:
   - exuberant-ctags
   - bat
   - stow
+  - ripgrep
 
 desktop_packages:
-  - bspwm
+  - awesome
   - sxhkd
   # - dunst # Replace with xfce4-notifyd
-  - xfce4-notifyd
+  # - xfce4-notifyd
   - rofi
   - thunderbird
   - thunderbird-locale-pt
   - firefox
   - qutebrowser
-  #- chromium # this is for linux mint
   - chromium-browser # this is for ubuntu
   - nextcloud-desktop
   - flameshot
@@ -32,8 +32,7 @@ desktop_packages:
   - xfce4-clipman
   - xfce4-clipman-plugin
   - xsettingsd
-    # - compton
-  - picom
+  - compton
   - lxpolkit
   - nitrogen
   - feh
@@ -57,8 +56,8 @@ utilities_packages:
   - build-essential
   - libx11-dev
   - libxinerama-dev 
-  - libxft-dev
-  - libx11-xcb-dev
+  # - libxft-dev # error with libc6
+  # - libx11-xcb-dev
   - fonts-firacode
   - fonts-cantarell
   - fonts-hack
@@ -81,6 +80,8 @@ utilities_packages:
   - wireguard
   - wireguard-tools
   - sshfs
+  - todotxt-cli
+  - brightnessctl
 
 dev_packages:
   # - emacs
@@ -95,7 +96,7 @@ extra_packages:
   - xsel
   - speedcrunch
   - xwallpaper
-  - dbeaver
+  # - dbeaver
   - gnumeric
   - inkscape
   - mpv
@@ -105,7 +106,7 @@ extra_packages:
   - libreoffice
   - hyphen-pt-pt
   - libreoffice-l10n-pt
-  - leafpad
+  # - leafpad
   - pinta
   - terminator
   - speedcrunch
@@ -116,7 +117,7 @@ extra_packages:
   # - youtube-dl
   # - transmission-gtk
   # - alacritty # does not exist
-  - postman # does not exist
+  #- postman # does not exist
 
 latex_packages:
   # - texlive-full # 6GB package install
@@ -128,7 +129,7 @@ flatpak_packages:
   - flatpak-xdg-utils
   - xdg-desktop-portal
   - xdg-desktop-portal-gtk
-    
+
 ms_teams_url: "https://go.microsoft.com/fwlink/p/?LinkID=2112886&clcid=0x4809&culture=en-sg&country=SG"
 
 ms_teams_package_name: "teams"

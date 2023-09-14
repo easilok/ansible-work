@@ -3,7 +3,12 @@
   set_fact:
     sudo_group: sudo
    
+- name: Gather available local users
+  getent:
+    database: passwd
+
 - name: Create a login user
+  when: username not in getent_passwd.keys()
   user:
     name: "{{ username }}"
     password: "{{ password | password_hash('sha512') }}"
