@@ -1,0 +1,48 @@
+---
+
+- name: Check if home's git folder exist
+  stat:
+    path: "/home/{{ username }}/git"
+  register: home_git_folder
+- name: Ensure git folder exists
+  file:
+    dest: "/home/{{ username }}/git"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    recurse: yes
+  when: not home_git_folder.stat.exists
+
+- name: Setup lf file manager
+  become: no
+  tags:
+    - lf
+    - go
+  block:
+    - name: Clone lf repository
+      git:
+        repo: "https://github.com/gokcehan/lf"
+        dest: "/home/{{ username }}/git/lf"
+        force: yes
+    - name: Install lf file manager
+      shell:
+        cmd: 'env CGO_ENABLED=0 go install -ldflags="-s -w"'
+        chdir: "/home/{{ username }}/git/lf"
+
+- name: Setup smug tmux session manager
+  become: no
+  tags:
+    - smug
+    - go
+  block:
+    - name: Clone smug repository
+      git:
+        repo: "https://github.com/ivaaaan/smug"
+        dest: "/home/{{ username }}/git/smug"
+        force: yes
+    - name: Install smug tmux session manager
+      shell:
+        cmd: 'go install'
+        chdir: "/home/{{ username }}/git/smug"
+
+

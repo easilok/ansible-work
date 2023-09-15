@@ -1,0 +1,33 @@
+---
+- name: Check if go is installed
+  command: which go
+  changed_when: false
+  failed_when: go_installed.rc not in [0,1]
+  register: go_installed
+
+- name: Setup go language
+  become: yes
+  when: go_installed.rc not in [ 0 ]
+  block: 
+  - name: Download go binary
+    get_url:
+      url: "{{ go_download_url }}"
+      dest: "/tmp/go.tar.gz"
+  - name: Install go
+    unarchive:
+      src: "/tmp/go.tar.gz"
+      dest: "/usr/local"
+      remote_src: yes
+  - name: Gathers all go binary files
+    find:
+      paths:  "/usr/local/go/bin"
+      file_type: "any"
+    register: go_bin
+  - name: Link all go binary files
+    file:
+      src: "{{ item.path }}"
+      dest: "/usr/local/bin"
+      state: link
+    with_items: "{{ go_bin.files }}"
+
+- include_tasks: applications.yml

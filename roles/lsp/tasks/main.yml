@@ -1,0 +1,68 @@
+---
+- name: Install node runtime
+  become: no
+  shell:
+    cmd: ". {{ nvm_source }} && nvm install {{ node_global_version }} && nvm use {{ node_global_version }}"
+
+- name: Install InstantMarkdown
+  become: no
+  shell:
+    cmd: ". {{ nvm_source }} && npm -g install instant-markdown-d"
+
+- name: Install Yaml LSP server
+  become: no
+  when: "'yaml' in lsp_servers"
+  shell:
+    cmd: ". {{ nvm_source }} && npm install -g yaml-language-server"
+
+- name: Install Typescript LSP server
+  become: no
+  when: "'typescript' in lsp_servers"
+  shell:
+    cmd: ". {{ nvm_source }} && npm install -g typescript typescript-language-server"
+
+- name: Install Vue LSP server
+  become: no
+  when: "'vue' in lsp_servers"
+  shell:
+    cmd: ". {{ nvm_source }} && npm install -g @volar/vue-language-server"
+
+- name: Install Docker LSP server
+  become: no
+  when: "'docker' in lsp_servers"
+  shell:
+    cmd: ". {{ nvm_source }} && npm install -g dockerfile-language-server-nodejs"
+
+- name: Install Bash LSP server
+  become: no
+  when: "'bash' in lsp_servers"
+  shell:
+    cmd: ". {{ nvm_source }} && npm install -g bash-language-server"
+
+- name: Install arduino LSP server
+  become: no
+  when: "'arduino' in lsp_servers"
+  block:
+    - name: Check if home's git folder exist
+      stat:
+        path: "/home/{{ username }}/git"
+      register: home_git_folder
+    - name: Ensure git folder exists
+      file:
+        dest: "/home/{{ username }}/git"
+        state: directory
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        recurse: yes
+      when: not home_git_folder.stat.exists
+    - name: Clone arduino lsp server repository
+      git:
+        repo: "https://github.com/arduino/arduino-language-server"
+        dest: "/home/{{ username }}/git/arduino-language-server"
+        force: yes
+    - name: Install arduino lsp server
+      shell:
+        cmd: 'go build && go install'
+        chdir: "/home/{{ username }}/git/arduino-language-server"
+
+

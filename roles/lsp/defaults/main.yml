@@ -1,0 +1,15 @@
+---
+
+home_path: "/home/{{ username }}"
+
+nvm_source: "/home/{{ username }}/.nvm/nvm.sh"
+
+node_global_version: 16.16
+
+lsp_servers:
+  - typescript
+  - yaml
+  - vue
+  - docker
+  - bash
+  - arduino

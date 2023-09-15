@@ -40,6 +40,15 @@
       tags:
         - pyenv
 
+    - role: go
+      tags:
+        - go
+
+    - role: lsp
+      when: enable_nvim_lsp | default(False)
+      tags:
+        - lsp
+
     - role: docker
       tags:
         - docker

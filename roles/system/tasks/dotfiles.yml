@@ -218,5 +218,10 @@
       register: result
       changed_when: 'result.stderr is search("LINK: ")'
 
-    
-    
+- name: link todo.txt config
+  become: no
+  shell:
+    chdir: "{{ dotfiles_path }}"
+    cmd: "stow --target {{ home_path }} --verbose=2 todotxt"
+  register: result
+  changed_when: 'result.stderr is search("LINK: ")'

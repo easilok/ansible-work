@@ -1,0 +1,10 @@
+---
+- name: Setup hibernation polkit rule
+  become: yes
+  copy:
+    src: "files/com.ubuntu.enable-hibernate.pkla"
+    dest: "/etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla"
+    mode: 0644
+    owner: root
+    group: root
+

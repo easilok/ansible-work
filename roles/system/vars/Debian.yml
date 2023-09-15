@@ -72,7 +72,7 @@ utilities_packages:
   - zsh
   - zsh-syntax-highlighting
   - zsh-autosuggestions
-  - fzf
+  # - fzf # Should be installed locally by nvim packages
   - exa
   - sxiv
   - dex
@@ -82,6 +82,7 @@ utilities_packages:
   - sshfs
   - todotxt-cli
   - brightnessctl
+  - pandoc
 
 dev_packages:
   # - emacs
@@ -123,6 +124,8 @@ latex_packages:
   # - texlive-full # 6GB package install
   - texlive
   - texlive-lang-portuguese
+  - texlive-xetex
+  - texlive-luatex
   
 flatpak_packages:
   - flatpak

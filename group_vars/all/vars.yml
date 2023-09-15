@@ -124,6 +124,10 @@ enable_endlessh: false
 
 enable_virtualization: false
 
+# Application specific
+
+enable_nvim_lsp: true
+
 #
 # Web Server
 #
