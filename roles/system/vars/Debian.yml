@@ -4,6 +4,7 @@ cli_packages:
   - neomutt
   - vim
   - git
+  - git-lfs
   - tmux
   - pass
   - wget
@@ -85,6 +86,7 @@ utilities_packages:
   - pandoc
 
 dev_packages:
+  - hugo
   # - emacs
   # - nvm
 

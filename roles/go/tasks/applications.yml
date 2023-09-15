@@ -14,6 +14,7 @@
   when: not home_git_folder.stat.exists
 
 - name: Setup lf file manager
+  when: "'lf' in go_applications"
   become: no
   tags:
     - lf
@@ -30,6 +31,7 @@
         chdir: "/home/{{ username }}/git/lf"
 
 - name: Setup smug tmux session manager
+  when: "'smug' in go_applications"
   become: no
   tags:
     - smug
@@ -45,4 +47,78 @@
         cmd: 'go install'
         chdir: "/home/{{ username }}/git/smug"
 
+- name: Setup glow markdown viewer
+  when: "'glow' in go_applications"
+  become: no
+  tags:
+    - glow
+    - go
+  block:
+    - name: Clone glow repository
+      git:
+        repo: "https://github.com/charmbracelet/glow"
+        dest: "/home/{{ username }}/git/glow"
+        force: yes
+    - name: Install glow markdown viewer
+      shell:
+        cmd: 'go install'
+        chdir: "/home/{{ username }}/git/glow"
+
+- name: Setup gitty git server portal
+  when: "'gitty' in go_applications"
+  become: no
+  tags:
+    - gitty
+    - go
+  block:
+    - name: Clone gitty repository
+      git:
+        repo: "https://github.com/muesli/gitty"
+        dest: "/home/{{ username }}/git/gitty"
+        force: yes
+    - name: Install gitty git server portal
+      shell:
+        cmd: 'go install'
+        chdir: "/home/{{ username }}/git/gitty"
+
+- name: Setup pomodoro/timer 
+  when: "'pomo' in go_applications"
+  become: no
+  tags:
+    - pomo
+    - go
+  block:
+    - name: Clone timer repository
+      git:
+        repo: "https://github.com/caarlos0/timer"
+        dest: "/home/{{ username }}/git/timer"
+        force: yes
+    - name: Install timer
+      shell:
+        cmd: 'go install'
+        chdir: "/home/{{ username }}/git/timer"
+    - name: Install pomo dependencies
+      become: yes
+      package:
+        name:
+          - lolcat
+          # - spd-say
+        state: present
+
+- name: Setup vhs terminal recorder
+  when: "'vhs' in go_applications"
+  become: no
+  tags:
+    - vhs
+    - go
+  block:
+    - name: Clone vhs repository
+      git:
+        repo: "https://github.com/charmbracelet/vhs"
+        dest: "/home/{{ username }}/git/vhs"
+        force: yes
+    - name: Install vhs terminal recorder
+      shell:
+        cmd: 'go install'
+        chdir: "/home/{{ username }}/git/vhs"
 
