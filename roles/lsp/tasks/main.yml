@@ -39,6 +39,18 @@
   shell:
     cmd: ". {{ nvm_source }} && npm install -g bash-language-server"
 
+- name: Install tailwind LSP server
+  become: no
+  when: "'tailwind' in lsp_servers"
+  shell:
+    cmd: ". {{ nvm_source }} && npm install -g tailwindcss-language-server"
+
+- name: Install eslint, JSON, CSS and HTML LSP server
+  become: no
+  when: "'eslint' in lsp_servers or 'json' in lsp_servers or 'css' in lsp_servers or 'html' in lsp_servers"
+  shell:
+    cmd: ". {{ nvm_source }} && npm install -g vscode-langservers-extracted"
+
 - name: Install arduino LSP server
   become: no
   when: "'arduino' in lsp_servers"

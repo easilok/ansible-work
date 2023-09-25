@@ -13,3 +13,5 @@ lsp_servers:
   - docker
   - bash
   - arduino
+  - tailwind
+  - eslint
