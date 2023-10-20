@@ -122,3 +122,12 @@
         cmd: 'go install'
         chdir: "/home/{{ username }}/git/vhs"
 
+- name: Install gopls LSP
+  when: "'gopls' in go_applications"
+  become: no
+  tags:
+    - gopls
+    - go
+  shell:
+    cmd: 'go install golang.org/x/tools/gopls@latest'
+

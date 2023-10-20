@@ -39,6 +39,12 @@
   shell:
     cmd: ". {{ nvm_source }} && npm install -g bash-language-server"
 
+- name: Install Python LSP server
+  become: no
+  when: "'python' in lsp_servers"
+  shell:
+    cmd: ". {{ nvm_source }} && npm install -g pyright"
+
 - name: Install tailwind LSP server
   become: no
   when: "'tailwind' in lsp_servers"

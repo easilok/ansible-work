@@ -8,5 +8,6 @@ go_applications:
   - glow
   - pomo
   - vhs
+  - gopls
   # - gitty # useful for gitub, gitlab, gitea
   # - hugo # installed with package manager
