@@ -1,0 +1,4 @@
+---
+
+restic_archive: "restic_0.16.2_linux_amd64.bz2"
+restic_url: "https://github.com/restic/restic/releases/download/v0.16.2/{{ restic_archive }}"

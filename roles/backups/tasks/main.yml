@@ -1,0 +1,43 @@
+---
+# - name: Include OS-specific variables
+#   include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+- name: Setup Restic
+  tags:
+    - backup
+    - restic
+  when: enable_extra_packages
+  become: false
+  block:
+  - name: Ensure user local bin folder exists
+    file:
+      dest: "/home/{{ username }}/.local/bin"
+      state: directory
+      owner: "{{ username }}"
+      group: "{{ username }}"
+      recurse: yes
+  - name: Check Restic installation
+    stat:
+      path: "/home/{{ username }}/.local/bin/restic"
+    register: restic_binary_stat
+  - name: Download Restic
+    when: not restic_binary_stat.stat.exists
+    get_url:
+      url: "{{ restic_url }}"
+      dest: "/home/{{ username }}/.local/bin/restic.bz2"
+  - name: Install Restic
+    when: not restic_binary_stat.stat.exists
+    shell:
+      cmd: "bzip2 -d restic.bz2"
+      chdir: "/home/{{ username }}/.local/bin"
+  - name: Set Restic as executable
+    file:
+      path: "/home/{{ username }}/.local/bin/restic"
+      owner: "{{ username }}"
+      group: "{{ username }}"
+      mode: '0755'
+  - name: Update Restic binary
+    shell:
+      cmd: "./restic self-update"
+      chdir: "/home/{{ username }}/.local/bin"
+

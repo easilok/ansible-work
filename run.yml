@@ -92,3 +92,8 @@
         - virtualization
         - system
       when: enable_virtualization | default(False)
+
+    - role: backups
+      tags:
+        - backups
+        - restic

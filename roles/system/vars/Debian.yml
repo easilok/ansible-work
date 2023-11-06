@@ -51,6 +51,7 @@ desktop_packages:
   - dex
   - kitty
   - parcellite
+  - xdotool
 
 utilities_packages:
   - rsync
@@ -84,6 +85,7 @@ utilities_packages:
   - todotxt-cli
   - brightnessctl
   - pandoc
+  - bzip2
 
 dev_packages:
   - hugo
@@ -115,6 +117,9 @@ extra_packages:
   - speedcrunch
   - gparted
   - inkscape
+  - wordnet
+  - figlet
+  - surfraw
   # - tlp # disabled because can be a desktop
   # - rdesktop
   # - youtube-dl
