@@ -40,8 +40,38 @@
       dest: "/tmp/iosevka-aile.zip"
   - name: Install Iosevka font
     when: not font_data.stat.exists
-    become: yes
+    become: true
     unarchive:
       src:  "/tmp/iosevka-aile.zip"
+      dest: "{{ folder_path }}"
+      remote_src: yes
+
+- name: Setup Hack Nerd font
+  vars: 
+    folder_name: "hack-nerd"
+    folder_path: "/usr/share/fonts/truetype/hack-nerd"
+  block:
+  - name: Check if the Hack Nerd exists already
+    stat:
+      path: "{{ folder_path }}"
+    register: font_data
+  - name: Ensure Hack Nerd folder exists
+    when: not font_data.stat.exists
+    file:
+      dest: "{{ folder_path }}"
+      state: directory
+      owner: "root"
+      group: "root"
+      recurse: yes
+  - name: Download Hack Nerd font
+    when: not font_data.stat.exists
+    get_url:
+      url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Hack.zip"
+      dest: "/tmp/hack.zip"
+  - name: Install Hack Nerd font
+    when: not font_data.stat.exists
+    become: true
+    unarchive:
+      src:  "/tmp/hack.zip"
       dest: "{{ folder_path }}"
       remote_src: yes

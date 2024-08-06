@@ -1,0 +1,23 @@
+- name: Install fonts
+  become: true
+  block:
+    - name: Ensure Fonts opentype directory
+      file:
+        dest: "/usr/share/fonts/opentype"
+        state: directory
+        owner: "root"
+        group: "root"
+        recurse: yes
+    - name: Ensure Fonts truetype directory
+      file:
+        dest: "/usr/share/fonts/truetype"
+        state: directory
+        owner: "root"
+        group: "root"
+        recurse: yes
+    - name: Setup and install font list
+      include_tasks: 
+        file: fonts.yml 
+    - name: Update font cache
+      shell:
+        cmd: fc-cache -f
