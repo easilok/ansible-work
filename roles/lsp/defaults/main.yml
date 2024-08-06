@@ -4,7 +4,7 @@ home_path: "/home/{{ username }}"
 
 nvm_source: "/home/{{ username }}/.nvm/nvm.sh"
 
-node_global_version: 16.16
+node_global_version: 20.10
 
 lsp_servers:
   - typescript
