@@ -15,7 +15,7 @@
 
 - name: Setup lf file manager
   when: "'lf' in go_applications"
-  become: no
+  become: false
   tags:
     - lf
     - go
@@ -32,7 +32,7 @@
 
 - name: Setup smug tmux session manager
   when: "'smug' in go_applications"
-  become: no
+  become: false
   tags:
     - smug
     - go
@@ -49,7 +49,7 @@
 
 - name: Setup glow markdown viewer
   when: "'glow' in go_applications"
-  become: no
+  become: false
   tags:
     - glow
     - go
@@ -66,7 +66,7 @@
 
 - name: Setup gitty git server portal
   when: "'gitty' in go_applications"
-  become: no
+  become: false
   tags:
     - gitty
     - go
@@ -83,7 +83,7 @@
 
 - name: Setup pomodoro/timer 
   when: "'pomo' in go_applications"
-  become: no
+  become: false
   tags:
     - pomo
     - go
@@ -98,7 +98,7 @@
         cmd: 'go install'
         chdir: "/home/{{ username }}/git/timer"
     - name: Install pomo dependencies
-      become: yes
+      become: true
       package:
         name:
           - lolcat
@@ -107,7 +107,7 @@
 
 - name: Setup vhs terminal recorder
   when: "'vhs' in go_applications"
-  become: no
+  become: false
   tags:
     - vhs
     - go
@@ -122,9 +122,20 @@
         cmd: 'go install'
         chdir: "/home/{{ username }}/git/vhs"
 
+- name: Setup gdu disk usage analyzer
+  when: "'gdu' in go_applications"
+  become: false
+  tags:
+    - gdu
+    - go
+  block:
+    - name: Install gdu disk usage analyzer
+      shell:
+        cmd: "go install {{ gdu_package_url }}"
+
 - name: Install gopls LSP
   when: "'gopls' in go_applications"
-  become: no
+  become: false
   tags:
     - gopls
     - go

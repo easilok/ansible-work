@@ -2,6 +2,8 @@
 
 go_download_url: "https://go.dev/dl/go1.21.1.linux-amd64.tar.gz"
 
+gdu_package_url: "github.com/dundee/gdu/v5/cmd/gdu@latest"
+
 go_applications:
   - lf
   - smug
@@ -9,5 +11,6 @@ go_applications:
   - pomo
   - vhs
   - gopls
+  - gdu
   # - gitty # useful for gitub, gitlab, gitea
   # - hugo # installed with package manager
