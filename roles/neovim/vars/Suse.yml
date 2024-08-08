@@ -1,0 +1,14 @@
+---
+prerequisites:
+  - ninja 
+  - cmake
+  - gcc-c++ 
+  - gettext-tools
+  - curl
+  - tree-sitter
+
+  # - pkg-config 
+  # - unzip 
+  # - doxygen
+
+

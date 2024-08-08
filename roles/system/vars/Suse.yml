@@ -1,0 +1,166 @@
+---
+cli_packages:
+  - htop
+  - neomutt
+  - vim
+  - git
+  - git-lfs
+  - tmux
+  - password-store
+  - wget
+  - curl
+  - mlocate
+  - sshpass
+  - universal-ctags
+  - bat
+  - stow
+  - ripgrep
+  - lnav
+  - ncdu
+
+desktop_packages:
+  - awesome
+  - sxhkd
+  # - dunst # Replace with xfce4-notifyd
+  # - xfce4-notifyd
+  - rofi
+  - thunderbird
+  - firefox
+  - qutebrowser
+  - chromium-browser # this is for ubuntu
+  - nextcloud-desktop
+  - flameshot
+  - pcmanfm
+  - xsettingsd
+  - picom
+  - lxpolkit
+  - nitrogen
+  - feh
+  - ristretto
+  - tumbler
+  - numlockx
+  - polybar
+  - lxappearance
+  - dex
+  - kitty
+  - parcellite
+  - xdotool
+  - gtk2-metatheme-arc
+  - gtk3-metatheme-arc
+  - gtk4-metatheme-arc
+  - faenza-icon-theme
+  - xfce4-clipman-plugin
+  # does not exist on suse
+  # - thunderbird-locale-pt 
+  # - xss-lock
+  # - i3lock-fancy
+  # - obsidian-icon-theme
+  # - wmname
+  # - xfce4-clipman
+
+utilities_packages:
+  - rsync
+  - libX11-devel
+  - libXinerama-devel
+  - libXft-devel
+  # - libxft-dev # error with libc6
+  # - libx11-xcb-dev
+  - cantarell-fonts
+  - hack-fonts
+  - google-noto-fonts
+  - google-noto-coloremoji-fonts
+  - fontawesome-fonts
+  - google-roboto-fonts
+  - dejavu-fonts
+  - fontconfig
+  # - ttf-mscorefonts-installer
+  - zsh
+  # - fzf # Should be installed locally by nvim packages
+  - exa
+  - sxiv
+  - dex
+  - playerctl
+  - wireguard-tools
+  - sshfs
+  - brightnessctl
+  - pandoc
+  - bzip2
+  - make
+  - gcc
+  - gcc-c++
+  # does not exist on suse
+  # - todotxt-cli
+  # - wireguard
+  # - build-essential
+  # - zsh-syntax-highlighting
+  # - zsh-autosuggestions
+  # - firacode-fonts
+  # - ibm-plex-fonts
+
+dev_packages:
+  - hugo
+  # - emacs
+  # - nvm
+
+extra_packages:
+  - isync
+  - arandr
+  - remmina
+  - remmina-plugin-rdp
+  - xsel
+  - speedcrunch
+  - xwallpaper
+  # - dbeaver
+  - gnumeric
+  - inkscape
+  - mpv
+  - zathura
+  - evince
+  - libreoffice
+  - libreoffice-l10n-pt
+  # - leafpad
+  - pinta
+  - terminator
+  - speedcrunch
+  - gparted
+  - inkscape
+  - wordnet
+  - figlet
+  - surfraw
+  # - tlp # disabled because can be a desktop
+  # - youtube-dl
+  # - transmission-gtk
+  # - alacritty # does not exist
+  # does not exist on suse
+  # - hyphen-pt-pt
+
+latex_packages:
+  # - texlive-full # 6GB package install
+  - texlive
+  - texlive-lang-portuguese
+  - texlive-xetex
+  - texlive-luatex
+  
+flatpak_packages:
+  - flatpak
+  - flatpak-xdg-utils
+  - xdg-desktop-portal
+  - xdg-desktop-portal-gtk
+
+ms_teams_url: "https://go.microsoft.com/fwlink/p/?LinkID=2112886&clcid=0x4809&culture=en-sg&country=SG"
+
+ms_teams_package_name: "teams"
+
+vscode_url: "https://vscode.download.prss.microsoft.com/dbazure/download/stable/b1c0a14de1414fcdaa400695b4db1c0799bc3124/code-1.92.0-1722473109.el8.x86_64.rpm"
+
+vscode_package_name: "code"
+
+default_terminal_path: "/usr/bin/kitty"
+# default_terminal_path: "/usr/bin/gnome-terminal"
+
+dbeaver_url: "https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm"
+
+dbeaver_package_name: "dbeaver-ce"
+
+xfce4_notifyd_path: "/usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd" # Linux mint && Ubuntu
+
