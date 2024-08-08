@@ -1,0 +1,15 @@
+---
+libvirt_deps:
+  - 'qemu'
+  - 'netcat-openbsd'
+  # - 'virt-viewer'
+  - 'bridge-utils' 
+  - 'libvirt-client' 
+  - 'libvirt-daemon'
+  - 'qemu-kvm'
+  - 'dnsmasq'
+  - 'dmidecode'
+  - 'ebtables'
+  - 'virt-install'
+  # not available on suse
+  # - 'cpu-checker' 

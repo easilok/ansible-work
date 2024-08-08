@@ -97,13 +97,13 @@
       shell:
         cmd: 'go install'
         chdir: "/home/{{ username }}/git/timer"
-    - name: Install pomo dependencies
-      become: true
-      package:
-        name:
-          - lolcat
-          # - spd-say
-        state: present
+    # - name: Install pomo dependencies
+    #   become: true
+    #   package:
+    #     name:
+    #       - lolcat
+    #       # - spd-say
+    #     state: present
 
 - name: Setup vhs terminal recorder
   when: "'vhs' in go_applications"

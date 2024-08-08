@@ -20,7 +20,9 @@
         group: "{{ username }}"
         recurse: yes
 
-    - name: Copy livirt cli command to home folder
+    - name: Copy libvirt cli config to home folder
+      # File was not visible on Suse
+      when: ansible_facts['os_family'] != 'Suse'
       become: yes
       copy:
         src: "/etc/libvirt/libvirt.conf"

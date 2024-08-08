@@ -1,0 +1,9 @@
+---
+- name: Download dbeaver
+  get_url:
+    url: "{{ dbeaver_url }}"
+    dest: "/tmp/{{ dbeaver_package_name }}.deb"
+
+- name: Install dbeaver
+  apt:
+    deb: "/tmp/{{ dbeaver_package_name }}.deb"

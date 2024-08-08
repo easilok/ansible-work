@@ -1,0 +1,8 @@
+---
+docker_deps:
+  - 'curl' # just to not be empty
+
+docker_packages:
+  - 'docker'
+  - 'docker-compose'
+  - 'docker-compose-switch'

@@ -62,13 +62,7 @@
 - name: Setup microsoft vscode
   when: vscode_package_name not in ansible_facts.packages and enable_vscode
   block:
-  - name: Download vscode
-    get_url:
-      url: "{{ vscode_url }}"
-      dest: "/tmp/vscode.deb"
-  - name: Install vscode
-    apt:
-      deb: "/tmp/vscode.deb"
+    - include_tasks: "{{ ansible_facts['os_family'] }}/vscode.yml"
 
 - name: Check dbeaver
   debug:
@@ -78,13 +72,7 @@
 - name: Setup dbeaver
   when: dbeaver_package_name not in ansible_facts.packages and enable_extra_packages
   block:
-  - name: Download dbeaver
-    get_url:
-      url: "{{ dbeaver_url }}"
-      dest: "/tmp/{{ dbeaver_package_name }}.deb"
-  - name: Install dbeaver
-    apt:
-      deb: "/tmp/{{ dbeaver_package_name }}.deb"
+    - include_tasks: "{{ ansible_facts['os_family'] }}/dbeaver.yml"
 
 - name: Install flatpak
   when: enable_flatpak | default (false)
@@ -148,6 +136,7 @@
 
 - name: Setup st terminal
   become: no
+  when: enable_st_terminal | default(False)
   block:
     - name: Clone st terminal personal build
       git:

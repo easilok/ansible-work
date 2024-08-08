@@ -1,0 +1,9 @@
+---
+- name: Download vscode
+  get_url:
+    url: "{{ vscode_url }}"
+    dest: "/tmp/vscode.deb"
+
+- name: Install vscode 
+  apt:
+    deb: "/tmp/vscode.deb"

@@ -4,7 +4,7 @@ home_path: "/home/{{ username }}"
 
 nvm_source: "/home/{{ username }}/.nvm/nvm.sh"
 
-node_global_version: 20.10
+node_global_version: "lts/iron"
 
 lsp_servers:
   - typescript

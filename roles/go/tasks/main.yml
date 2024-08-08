@@ -26,7 +26,7 @@
   - name: Link all go binary files
     file:
       src: "{{ item.path }}"
-      dest: "/usr/local/bin"
+      dest: "/usr/local/bin/{{ item.path | basename }}"
       state: link
     with_items: "{{ go_bin.files }}"
 

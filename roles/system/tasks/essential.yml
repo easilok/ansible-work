@@ -25,6 +25,13 @@
     autoremove: yes
     update_cache: yes
 
+- name: Update and upgrade yum packages (Suse)
+  when: ansible_os_family == 'Suse'
+  zypper:
+    name: '*'
+    state: 'latest'
+    update_cache: yes
+
 - name: Check if reboot required
   stat:
     path: /var/run/reboot-required

@@ -50,8 +50,8 @@
       state: present
 
 - name: Update apt and install docker-ce
-  when: ansible_facts['os_family'] == 'Debian'
-  apt:
+  when: ansible_facts['os_family'] == 'Debian' or ansible_facts['os_family'] == 'Suse' 
+  package:
     update_cache: yes
     name: "{{ docker_packages }}"
     state: present

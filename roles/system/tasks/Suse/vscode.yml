@@ -1,0 +1,7 @@
+---
+- name: Install vscode 
+  zypper:
+    name: '{{ vscode_url }}'
+    state: present
+    disable_gpg_check: true
+
