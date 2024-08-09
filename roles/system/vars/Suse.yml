@@ -50,6 +50,14 @@ desktop_packages:
   - gtk4-metatheme-arc
   - faenza-icon-theme
   - xfce4-clipman-plugin
+  # Multimedia codecs (could be needed to run with --from packman)
+  - ffmpeg 
+  - gstreamer-plugins-good
+  - gstreamer-plugins-bad
+  - gstreamer-plugins-ugly
+  - gstreamer-plugins-libav
+  - libavcodec 
+  - vlc-codecs
   # does not exist on suse
   # - thunderbird-locale-pt 
   # - xss-lock
@@ -99,6 +107,7 @@ utilities_packages:
 
 dev_packages:
   - hugo
+  - geos_devel
   # - emacs
   # - nvm
 

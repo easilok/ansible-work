@@ -2,6 +2,23 @@
 - name: Include OS-specific variables
   include_vars: "{{ ansible_facts['os_family'] }}.yml"
 
+- name: Add repositories
+  block:
+    - name: Add packman (Suse)
+      when: ansible_facts['os_family'] == 'Suse' 
+      zypper_repository:
+        name: packman
+        repo: 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed'
+        state: present
+        autorefresh: true
+        priority: 90
+    - name: Enable packman (Suse)
+      when: ansible_facts['os_family'] == 'Suse' 
+      zypper:
+        allow_vendor_change: true
+        extra_args: "--from packman"
+        state: "dist-upgrade"
+
   
 - name: Install CLI programs
   # become: yes
