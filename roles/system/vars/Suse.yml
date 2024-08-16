@@ -58,6 +58,7 @@ desktop_packages:
   - gstreamer-plugins-libav
   - libavcodec 
   - vlc-codecs
+  - i3blocks
   # does not exist on suse
   # - thunderbird-locale-pt 
   # - xss-lock
