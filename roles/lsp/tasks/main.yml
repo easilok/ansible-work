@@ -1,64 +1,64 @@
 ---
 - name: Install node runtime
-  become: no
+  become: false
   shell:
     cmd: ". {{ nvm_source }} && nvm install {{ node_global_version }} && nvm use {{ node_global_version }}"
 
 - name: Install InstantMarkdown
-  become: no
+  become: false
   shell:
     cmd: ". {{ nvm_source }} && npm -g install instant-markdown-d"
 
 - name: Install Yaml LSP server
-  become: no
+  become: false
   when: "'yaml' in lsp_servers"
   shell:
     cmd: ". {{ nvm_source }} && npm install -g yaml-language-server"
 
 - name: Install Typescript LSP server
-  become: no
+  become: false
   when: "'typescript' in lsp_servers"
   shell:
-    cmd: ". {{ nvm_source }} && npm install -g typescript typescript-language-server"
+    cmd: ". {{ nvm_source }} && npm install -g typescript typescript-language-server @vtsls/language-server"
 
 - name: Install Vue LSP server
-  become: no
+  become: false
   when: "'vue' in lsp_servers"
   shell:
     cmd: ". {{ nvm_source }} && npm install -g @volar/vue-language-server"
 
 - name: Install Docker LSP server
-  become: no
+  become: false
   when: "'docker' in lsp_servers"
   shell:
     cmd: ". {{ nvm_source }} && npm install -g dockerfile-language-server-nodejs"
 
 - name: Install Bash LSP server
-  become: no
+  become: false
   when: "'bash' in lsp_servers"
   shell:
     cmd: ". {{ nvm_source }} && npm install -g bash-language-server"
 
 - name: Install Python LSP server
-  become: no
+  become: false
   when: "'python' in lsp_servers"
   shell:
     cmd: ". {{ nvm_source }} && npm install -g pyright"
 
 - name: Install tailwind LSP server
-  become: no
+  become: false
   when: "'tailwind' in lsp_servers"
   shell:
     cmd: ". {{ nvm_source }} && npm install -g tailwindcss-language-server"
 
 - name: Install eslint, JSON, CSS and HTML LSP server
-  become: no
+  become: false
   when: "'eslint' in lsp_servers or 'json' in lsp_servers or 'css' in lsp_servers or 'html' in lsp_servers"
   shell:
     cmd: ". {{ nvm_source }} && npm install -g vscode-langservers-extracted"
 
 - name: Install arduino LSP server
-  become: no
+  become: false
   when: "'arduino' in lsp_servers"
   block:
     - name: Check if home's git folder exist
