@@ -12,5 +12,6 @@ go_applications:
   - vhs
   - gopls
   - gdu
+  - pet
   # - gitty # useful for gitub, gitlab, gitea
   # - hugo # installed with package manager

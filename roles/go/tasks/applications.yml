@@ -142,3 +142,19 @@
   shell:
     cmd: 'go install golang.org/x/tools/gopls@latest'
 
+- name: Setup pet snipped manager
+  when: "'pet' in go_applications"
+  become: false
+  tags:
+    - pet
+    - go
+  block:
+    - name: Clone pet repository
+      git:
+        repo: "https://github.com/knqyf263/pet.git"
+        dest: "/home/{{ username }}/git/pet"
+        force: yes
+    - name: Install pet snipped manager
+      shell:
+        cmd: 'make install'
+        chdir: "/home/{{ username }}/git/pet"
