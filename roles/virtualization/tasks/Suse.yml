@@ -1,0 +1,25 @@
+# - name: Ensure system is virtualization capable
+
+- name: Install KVM Virtualization Pattern
+  become: true
+  zypper:
+    type: "pattern"
+    name:
+      - kvm_server
+      - kvm_tools
+    state: present
+
+- name: Add user to livirt group
+  user:
+    name: '{{ username }}'
+    groups:
+      - libvirt
+    append: yes
+
+- name: Add user to kvm group
+  user:
+    name: '{{ username }}'
+    groups:
+      - kvm
+    append: yes
+

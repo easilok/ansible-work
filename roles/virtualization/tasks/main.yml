@@ -1,45 +1,4 @@
----
-- name: Include OS-specific variables
-  include_vars: "{{ ansible_facts['os_family'] }}.yml"
-
-# - name: Ensure system is virtualization capable
-
-- name: Install KVM/Qemu/Libvirt stack
-  become: yes
-  package:
-    state: present
-    name: "{{ libvirt_deps }}"
-
-- name: Set virsh cli configs
+- name: Setup Virtualization
   block:
-    - name: Ensure libvirt user config exists
-      file:
-        dest: "/home/{{ username }}/.config/libvirt"
-        state: directory
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        recurse: yes
+    - include_tasks: "{{ ansible_facts['os_family'] }}.yml"
 
-    - name: Copy libvirt cli config to home folder
-      # File was not visible on Suse
-      when: ansible_facts['os_family'] != 'Suse'
-      become: yes
-      copy:
-        src: "/etc/libvirt/libvirt.conf"
-        dest: "/home/{{ username }}/.config/libvirt/libvirt.conf"
-        owner: "{{ username }}"
-        group: "{{ username }}"
-
-- name: Add user to livirt group
-  user:
-    name: '{{ username }}'
-    groups:
-      - libvirt
-    append: yes
-
-- name: Add user to kvm group
-  user:
-    name: '{{ username }}'
-    groups:
-      - kvm
-    append: yes
