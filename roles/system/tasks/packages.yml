@@ -18,6 +18,7 @@
         allow_vendor_change: true
         extra_args: "--from packman"
         state: "dist-upgrade"
+        name: "*"
 
   
 - name: Install CLI programs

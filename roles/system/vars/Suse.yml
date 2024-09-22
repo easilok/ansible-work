@@ -108,7 +108,7 @@ utilities_packages:
 
 dev_packages:
   - hugo
-  - geos_devel
+  - geos-devel
   # - emacs
   # - nvm
 
