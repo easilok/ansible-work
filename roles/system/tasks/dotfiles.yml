@@ -12,7 +12,7 @@
 
 # Link folders
 - name: Link dotfiles
-  become: no
+  become: false
   block:
     - name: Ensure local/bin directory
       file:
@@ -22,7 +22,7 @@
         group: "{{ username }}"
         recurse: yes
     - name: Setting default terminal
-      become: yes
+      become: true
       file:
         src: "{{ default_terminal_path }}"
         dest: "/usr/bin/default_terminal"
@@ -87,6 +87,11 @@
         src:  "{{ dotfiles_path }}/home/.config/compton.conf"
         dest: "{{ home_path }}/.config/compton.conf"
         state: link
+    - name: Link picom config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/picom"
+        dest: "{{ home_path }}/.config/picom"
+        state: link
     - name: Link alacritty config
       file:
         src:  "{{ dotfiles_path }}/home/.config/alacritty"
@@ -97,9 +102,29 @@
         src:  "{{ dotfiles_path }}/home/.config/qutebrowser"
         dest: "{{ home_path }}/.config/qutebrowser"
         state: link
+    - name: Link kitty config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/kitty"
+        dest: "{{ home_path }}/.config/kitty"
+        state: link
+    - name: Link xmodmap config
+      file:
+        src:  "{{ dotfiles_path }}/home/.Xmodmap"
+        dest: "{{ home_path }}/.Xmodmap"
+        state: link
+    - name: Link xsettings config
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/xsettingsd"
+        dest: "{{ home_path }}/.config/xsettingsd"
+        state: link
+    - name: Link alias
+      file:
+        src:  "{{ dotfiles_path }}/home/.config/aliasrc"
+        dest: "{{ home_path }}/.config/aliasrc"
+        state: link
 
 - name: Setup neomutt config
-  become: no
+  become: false
   block:
     - name: Creates neomutt config folder
       file:
@@ -121,7 +146,7 @@
       with_items: "{{ neomutt_files.files }}"
 
 - name: Setup git config
-  become: no
+  become: false
   block:
     - name: Link git config
       file:
@@ -144,7 +169,7 @@
       with_items: "{{ git_scripts.files }}"
 
 - name: Setup dmenu scripts
-  become: no
+  become: false
   block:
   - name: Link dmenu config folder
     file:
@@ -164,7 +189,7 @@
     with_items: "{{ dmenu_script_files.files }}"
 
 - name: Setup vim/nvim
-  become: no
+  become: false
   block:
     - name: Ensure .vim folder
       file:
@@ -219,9 +244,17 @@
       changed_when: 'result.stderr is search("LINK: ")'
 
 - name: link todo.txt config
-  become: no
+  become: false
   shell:
     chdir: "{{ dotfiles_path }}"
     cmd: "stow --target {{ home_path }} --verbose=2 todotxt"
+  register: result
+  changed_when: 'result.stderr is search("LINK: ")'
+
+- name: link i3 config
+  become: false
+  shell:
+    chdir: "{{ dotfiles_path }}"
+    cmd: "stow --target {{ home_path }} --verbose=2 i3"
   register: result
   changed_when: 'result.stderr is search("LINK: ")'
