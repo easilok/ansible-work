@@ -9,7 +9,7 @@ cli_packages:
   - pass
   - wget
   - curl
-  - mlocate
+  - locate
   - ssh-askpass
   - exuberant-ctags
   - bat
@@ -28,7 +28,6 @@ desktop_packages:
   - thunderbird-locale-pt
   - firefox
   - qutebrowser
-  - chromium-browser # this is for ubuntu
   - nextcloud-desktop
   - flameshot
   - pcmanfm
@@ -54,14 +53,15 @@ desktop_packages:
   - kitty
   - parcellite
   - xdotool
+  - vim-gtk3
 
 utilities_packages:
   - rsync
   - build-essential
   - libx11-dev
   - libxinerama-dev 
-  # - libxft-dev # error with libc6
-  # - libx11-xcb-dev
+  - libxft-dev
+  - libx11-xcb-dev
   - fonts-firacode
   - fonts-cantarell
   - fonts-hack
@@ -77,7 +77,7 @@ utilities_packages:
   - zsh-syntax-highlighting
   - zsh-autosuggestions
   # - fzf # Should be installed locally by nvim packages
-  - exa
+  - eza
   - sxiv
   - dex
   - playerctl
@@ -91,6 +91,8 @@ utilities_packages:
 
 dev_packages:
   - hugo
+  - python3-pynvim
+  - python3-pip
   # - emacs
   # - nvm
 
@@ -114,7 +116,6 @@ extra_packages:
   - hyphen-pt-pt
   - libreoffice-l10n-pt
   # - leafpad
-  - pinta
   - terminator
   - speedcrunch
   - gparted
