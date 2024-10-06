@@ -11,7 +11,7 @@
     - neovim
 
 - name: Setup and install neovim
-  become: no
+  become: true
   tags:
     - install
     - neovim
@@ -45,8 +45,15 @@
           NUM_THREADS: 2
           CMAKE_BUILD_TYPE: "RelWithDebInfo"
     - name: Install neovim
-      become: yes
+      become: true
       community.general.make:
         chdir: "/home/{{ username }}/git/neovim"
         target: install
 
+- name: Setup tree sitter cli
+  become: false
+  tags:
+    - install
+    - neovim
+  shell:
+    cmd: ". {{ nvm_source }} && npm install -g tree-sitter-cli"
