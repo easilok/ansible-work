@@ -31,10 +31,6 @@
       tags:
         - system
 
-    - role: neovim
-      tags:
-        - neovim
-
     - role: pyenv
       when: enable_pyenv | default(False)
       tags:
@@ -52,6 +48,10 @@
     - role: docker
       tags:
         - docker
+
+    - role: neovim
+      tags:
+        - neovim
 
     # Use auto script
     # - role: nix
