@@ -59,6 +59,7 @@ desktop_packages:
   - libavcodec 
   - vlc-codecs
   - i3blocks
+  - i3status
   # does not exist on suse
   # - thunderbird-locale-pt 
   # - xss-lock
