@@ -166,7 +166,7 @@ vscode_url: "https://vscode.download.prss.microsoft.com/dbazure/download/stable/
 
 vscode_package_name: "code"
 
-default_terminal_path: "/usr/bin/kitty"
+default_terminal_path: "/usr/bin/wezterm"
 # default_terminal_path: "/usr/bin/gnome-terminal"
 
 dbeaver_url: "https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm"
