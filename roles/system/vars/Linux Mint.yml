@@ -1,0 +1,161 @@
+---
+cli_packages:
+  - htop
+  - neomutt
+  - vim
+  - git
+  - git-lfs
+  - tmux
+  - pass
+  - wget
+  - curl
+  - locate
+  - ssh-askpass
+  - exuberant-ctags
+  - bat
+  - stow
+  - ripgrep
+  - lnav
+  - ncdu
+
+desktop_packages:
+  - awesome
+  - sxhkd
+  # - dunst # Replace with xfce4-notifyd
+  # - xfce4-notifyd
+  - rofi
+  - thunderbird
+  - thunderbird-locale-pt
+  - firefox
+  - qutebrowser
+  - nextcloud-desktop
+  - flameshot
+  - pcmanfm
+  - xfce4-clipman
+  - xfce4-clipman-plugin
+  - xsettingsd
+  - compton
+  - lxpolkit
+  - nitrogen
+  - feh
+  - ristretto
+  - tumbler
+  - wmname
+  - numlockx
+  - xss-lock
+  - i3lock-fancy
+  - polybar
+  - lxappearance
+  - arc-theme
+  - faenza-icon-theme
+  - obsidian-icon-theme
+  - dex
+  - kitty
+  - parcellite
+  - xdotool
+  - vim-gtk3
+
+utilities_packages:
+  - rsync
+  - build-essential
+  - libx11-dev
+  - libxinerama-dev 
+  - libxft-dev
+  - libx11-xcb-dev
+  - fonts-firacode
+  - fonts-cantarell
+  - fonts-hack
+  - fonts-noto
+  - fonts-noto-color-emoji
+  - fonts-font-awesome
+  - fonts-ibm-plex
+  - fonts-roboto
+  - fonts-dejavu
+  - fontconfig
+  # - ttf-mscorefonts-installer
+  - zsh
+  - zsh-syntax-highlighting
+  - zsh-autosuggestions
+  # - fzf # Should be installed locally by nvim packages
+  - eza
+  - sxiv
+  - dex
+  - playerctl
+  - wireguard
+  - wireguard-tools
+  - sshfs
+  - todotxt-cli
+  - brightnessctl
+  - pandoc
+  - bzip2
+
+dev_packages:
+  - hugo
+  - python3-pynvim
+  - python3-pip
+  # - emacs
+  # - nvm
+
+extra_packages:
+  - isync
+  - arandr
+  - exuberant-ctags
+  - remmina
+  - remmina-plugin-rdp
+  - xsel
+  - speedcrunch
+  - xwallpaper
+  # - dbeaver
+  - gnumeric
+  - inkscape
+  - mpv
+  - xarchiver
+  - zathura
+  - evince
+  - libreoffice
+  - hyphen-pt-pt
+  - libreoffice-l10n-pt
+  # - leafpad
+  - terminator
+  - speedcrunch
+  - gparted
+  - inkscape
+  - wordnet
+  - figlet
+  - surfraw
+  # - tlp # disabled because can be a desktop
+  # - rdesktop
+  # - youtube-dl
+  # - transmission-gtk
+  # - alacritty # does not exist
+  #- postman # does not exist
+
+latex_packages:
+  # - texlive-full # 6GB package install
+  - texlive
+  - texlive-lang-portuguese
+  - texlive-xetex
+  - texlive-luatex
+  
+flatpak_packages:
+  - flatpak
+  - flatpak-xdg-utils
+  - xdg-desktop-portal
+  - xdg-desktop-portal-gtk
+
+ms_teams_url: "https://go.microsoft.com/fwlink/p/?LinkID=2112886&clcid=0x4809&culture=en-sg&country=SG"
+
+ms_teams_package_name: "teams"
+
+vscode_url: "https://az764295.vo.msecnd.net/stable/57fd6d0195bb9b9d1b49f6da5db789060795de47/code_1.67.0-1651667246_amd64.deb"
+
+vscode_package_name: "code"
+
+default_terminal_path: "/usr/bin/kitty"
+# default_terminal_path: "/usr/bin/gnome-terminal"
+
+dbeaver_url: "https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb"
+
+dbeaver_package_name: "dbeaver"
+
+xfce4_notifyd_path: "/usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd" # Linux mint && Ubuntu
