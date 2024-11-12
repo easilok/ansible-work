@@ -7,6 +7,22 @@
     state: present
     name: "{{ docker_deps }}"
 
+# Debian
+- name: Install Docker (Debian)
+  become: yes
+  when: ansible_facts['distribution'] == 'Debian'
+  block:
+  - name: Get Docker GPG apt Key (Debian)
+    get_url:
+      url: https://download.docker.com/linux/debian/gpg
+      dest: /etc/apt/keyrings/docker.asc
+      mode: '0755'
+
+  - name: Add Docker Repository (Debian)
+    apt_repository:
+      repo: deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable
+      state: present
+
 # Ubuntu
 - name: Install Docker (Ubuntu)
   when: ansible_facts['distribution'] == 'Ubuntu'
