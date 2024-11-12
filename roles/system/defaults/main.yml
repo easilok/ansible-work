@@ -15,3 +15,5 @@ home_path: "/home/{{ username }}"
 dotfiles_path: "/home/{{ username }}/git/dotfiles"
 
 nvm_url: "https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh"
+
+greenclip_url: "https://github.com/erebe/greenclip/releases/download/v4.2/greenclip"

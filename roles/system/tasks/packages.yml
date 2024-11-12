@@ -146,25 +146,25 @@
         chdir:  "/home/{{ username }}/git/dmenu"
         target: install
 
-- name: Setup st terminal
-  become: no
-  block:
-    - name: Clone st terminal personal build
-      git:
-        repo: "{{ st_repo }}"
-        dest: "{{ home_path }}/git/st"
-        version: "integration_0_8_5"
-    - name: Install st terminal 
-      become: yes
-      community.general.make:
-        chdir: "{{ home_path }}/git/st"
-        target: install
-    - name: Create st-terminal link
-      become: yes
-      file:
-        src: "/usr/local/bin/st"
-        dest: "/usr/local/bin/st-terminal"
-        state: link
+# - name: Setup st terminal
+#   become: no
+#   block:
+#     - name: Clone st terminal personal build
+#       git:
+#         repo: "{{ st_repo }}"
+#         dest: "{{ home_path }}/git/st"
+#         version: "integration_0_8_5"
+#     - name: Install st terminal 
+#       become: yes
+#       community.general.make:
+#         chdir: "{{ home_path }}/git/st"
+#         target: install
+#     - name: Create st-terminal link
+#       become: yes
+#       file:
+#         src: "/usr/local/bin/st"
+#         dest: "/usr/local/bin/st-terminal"
+#         state: link
 
 # - name: Install st terminal
 
@@ -192,4 +192,10 @@
         src:  "{{ xfce4_notifyd_path }}"
         dest: "/usr/local/bin/xfce4_notifyd_data"
         state: link
-        
+
+- name: Download and install greenclip clipboard manager
+  become: yes
+  get_url:
+    url: "{{ greenclip_url }}"
+    dest: "/usr/bin/greenclip"
+    mode: '0755'

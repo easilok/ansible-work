@@ -258,3 +258,11 @@
     cmd: "stow --target {{ home_path }} --verbose=2 i3"
   register: result
   changed_when: 'result.stderr is search("LINK: ")'
+
+- name: link greenclip config
+  become: false
+  shell:
+    chdir: "{{ dotfiles_path }}"
+    cmd: "stow --target {{ home_path }} --verbose=2 greenclip"
+  register: result
+  changed_when: 'result.stderr is search("LINK: ")'
