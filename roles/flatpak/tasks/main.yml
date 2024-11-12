@@ -1,0 +1,30 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_facts['distribution'] }}.yml"
+
+- name: Install flatpak
+  when: enable_flatpak | default (false)
+  package:
+    name: "{{ flatpak_packages }}"
+    state: present
+  tags:
+    - install
+    - flatpak
+
+- name: Add the flathub flatpak repository remote to the user installation
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    # method: user
+
+- name: Install flatpak applications
+  when: enable_flatpak | default (false)
+  flatpak:
+    name: "{{ flatpak_apps }}"
+    state: latest
+    # method: user
+  tags:
+    - install
+    - flatpak
+

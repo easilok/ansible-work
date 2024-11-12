@@ -101,3 +101,8 @@
     - role: fonts
       tags:
         - fonts
+
+    - role: flatpak
+      tags:
+        - install
+        - flatpak

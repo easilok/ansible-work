@@ -85,12 +85,6 @@
     apt:
       deb: "/tmp/{{ dbeaver_package_name }}.deb"
 
-- name: Install flatpak
-  when: enable_flatpak | default (false)
-  package:
-    name: "{{ flatpak_packages }}"
-    state: present
-    
 - name: Setup dwm and dwmblocks
   become: no
   when: enable_dwm | default(False)
