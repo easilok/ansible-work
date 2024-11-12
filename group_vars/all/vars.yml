@@ -21,7 +21,7 @@ username: luis
 
 guid: "1000"
 
-shell: /bin/zsh
+shell: /usr/bin/bash
 
 docker_dir: /home/docker
 
@@ -92,7 +92,7 @@ enable_nas_stuff: true
 
 enable_ms_teams: true
 
-enable_vscode: true
+enable_vscode: false
 
 enable_extra_packages: true
 
