@@ -25,8 +25,8 @@ desktop_packages:
   # - xfce4-notifyd
   - rofi
   - thunderbird
-  - thunderbird-locale-pt
-  - firefox
+  # - thunderbird-locale-pt # Debian missing
+  # - firefox # Debian missing
   - qutebrowser
   - nextcloud-desktop
   - flameshot
@@ -51,9 +51,10 @@ desktop_packages:
   - obsidian-icon-theme
   - dex
   - kitty
-  - parcellite
+  # - parcellite # not in debian
   - xdotool
   - vim-gtk3
+  - libgtk-3-0t64
 
 utilities_packages:
   - rsync
@@ -68,7 +69,7 @@ utilities_packages:
   - fonts-noto
   - fonts-noto-color-emoji
   - fonts-font-awesome
-  - fonts-ibm-plex
+  # - fonts-ibm-plex # not in debian
   - fonts-roboto
   - fonts-dejavu
   - fontconfig
@@ -103,7 +104,7 @@ extra_packages:
   - remmina
   - remmina-plugin-rdp
   - xsel
-  - speedcrunch
+  # - speedcrunch # not on debian
   - xwallpaper
   # - dbeaver
   - gnumeric
@@ -117,7 +118,6 @@ extra_packages:
   - libreoffice-l10n-pt
   # - leafpad
   - terminator
-  - speedcrunch
   - gparted
   - inkscape
   - wordnet
@@ -147,7 +147,7 @@ ms_teams_url: "https://go.microsoft.com/fwlink/p/?LinkID=2112886&clcid=0x4809&cu
 
 ms_teams_package_name: "teams"
 
-vscode_url: "https://az764295.vo.msecnd.net/stable/57fd6d0195bb9b9d1b49f6da5db789060795de47/code_1.67.0-1651667246_amd64.deb"
+vscode_url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
 
 vscode_package_name: "code"
 
