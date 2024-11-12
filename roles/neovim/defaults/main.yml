@@ -1,0 +1,3 @@
+---
+
+nvm_source: "/home/{{ username }}/.config/nvm/nvm.sh"

@@ -2,7 +2,7 @@
 
 home_path: "/home/{{ username }}"
 
-nvm_source: "/home/{{ username }}/.nvm/nvm.sh"
+nvm_source: "/home/{{ username }}/.config/nvm/nvm.sh"
 
 node_global_version: 20.10
 
