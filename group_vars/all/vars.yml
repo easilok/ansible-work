@@ -98,7 +98,7 @@ enable_extra_packages: true
 
 enable_flatpak: true
 
-enable_dwm: true
+enable_dwm: false
 
 enable_nix: false
 
