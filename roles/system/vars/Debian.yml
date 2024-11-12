@@ -21,7 +21,7 @@ cli_packages:
 desktop_packages:
   - awesome
   - sxhkd
-  # - dunst # Replace with xfce4-notifyd
+  - dunst 
   # - xfce4-notifyd
   - rofi
   - thunderbird
@@ -31,8 +31,6 @@ desktop_packages:
   - nextcloud-desktop
   - flameshot
   - pcmanfm
-  - xfce4-clipman
-  - xfce4-clipman-plugin
   - xsettingsd
   - compton
   - lxpolkit
@@ -51,10 +49,10 @@ desktop_packages:
   - obsidian-icon-theme
   - dex
   - kitty
-  # - parcellite # not in debian
   - xdotool
   - vim-gtk3
   - libgtk-3-0t64
+  - zenity
 
 utilities_packages:
   - rsync
