@@ -56,4 +56,5 @@
     - install
     - neovim
   shell:
-    cmd: ". {{ nvm_source }} && npm install -g tree-sitter-cli"
+    executable: '/bin/bash'
+    cmd: "source {{ nvm_source }} && npm install -g tree-sitter-cli"
