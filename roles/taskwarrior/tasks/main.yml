@@ -1,0 +1,52 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+# - name: Install required prerequisites
+#   package:
+#     state: present
+#     name: "{{ prerequisites }}"
+#   tags:
+#     - install
+#     - taskwarrior
+
+- name: Setup and install taskwarrior
+  become: true
+  tags:
+    - install
+    - taskwarrior
+  block:
+    - name: Check if home's git folder exist
+      stat:
+        path: "/home/{{ username }}/git"
+      register: home_git_folder
+    - name: Ensure git folder exists
+      file:
+        dest: "/home/{{ username }}/git"
+        state: directory
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        recurse: yes
+      when: not home_git_folder.stat.exists
+    - name: Clone taskwarrior repository
+      git:
+        repo: "https://github.com/GothenburgBitFactory/taskwarrior"
+        dest: "/home/{{ username }}/git/taskwarrior"
+        force: yes
+    - name: Clean previous taskwarrior build
+      community.general.make:
+        chdir: "/home/{{ username }}/git/taskwarrior"
+        target: distclean
+    - name: Build neovim
+      community.general.make:
+        chdir: "/home/{{ username }}/git/neovim"
+        # target: all
+        params:
+          NUM_THREADS: 2
+          CMAKE_BUILD_TYPE: "RelWithDebInfo"
+    - name: Install neovim
+      become: yes
+      community.general.make:
+        chdir: "/home/{{ username }}/git/neovim"
+        target: install
+
