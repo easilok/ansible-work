@@ -1,9 +1,8 @@
 ---
 libvirt_deps:
-  - 'qemu-system'
-  - 'qemu-utils'
+  - 'qemu'
   - 'netcat-openbsd'
-  - 'virt-viewer'
+  # - 'virt-viewer'
   - 'bridge-utils' 
   - 'cpu-checker' 
   - 'libvirt-clients' 
@@ -13,6 +12,6 @@ libvirt_deps:
   - 'dmidecode'
   - 'ebtables'
   - 'virtinst'
-  - 'virt-manager'
+  # - 'virt-manager'
   - 'libvirt-daemon-system'
-  - 'virtiofsd'
+  # - 'cockpit'
