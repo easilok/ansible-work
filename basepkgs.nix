@@ -2,10 +2,9 @@
 
 {
   inherit (pkgs)
-  alacritty
+  # alacritty
   bpytop
-  deadbeef
-  emacs
+  # deadbeef
   exa
   gotop
   neofetch
@@ -17,6 +16,7 @@
   difftastic # rust diff
   du-dust # rust du
   lfs # rust df
+  just
   postman;
   # polybar;
 }
