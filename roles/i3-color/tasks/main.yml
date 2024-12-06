@@ -1,0 +1,42 @@
+---
+
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_facts['distribution'] }}.yml"
+
+- name: Install required prerequisites
+  package:
+    name: "{{ prerequisites }}"
+    state: present
+  tags:
+    - install
+    - i3color
+
+- name: Setup and install i3-color
+  become: false
+  tags:
+    - install
+    - i3color
+  block:
+    - name: Check if home's git folder exist
+      stat:
+        path: "/home/{{ username }}/git"
+      register: home_git_folder
+    - name: Ensure git folder exists
+      file:
+        dest: "/home/{{ username }}/git"
+        state: directory
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        recurse: yes
+      when: not home_git_folder.stat.exists
+    - name: Clone i3-color repository
+      git:
+        repo: "https://github.com/Raymo111/i3lock-color"
+        dest: "/home/{{ username }}/git/i3lock-color"
+        force: yes
+    - name: Install i3-color 
+      become: true
+      shell:
+        executable: '/bin/bash'
+        cmd: "install-i3lock-color.sh"
+

@@ -53,6 +53,10 @@
       tags:
         - neovim
 
+    - role: i3-color
+      tags:
+        - i3color
+
     # Use auto script
     # - role: nix
     #   tags: 

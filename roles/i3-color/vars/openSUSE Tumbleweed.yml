@@ -1,0 +1,18 @@
+---
+
+prerequisites:
+   - autoconf
+   - automake
+   - cairo-devel
+   - fontconfig
+   - gcc
+   - libev-devel
+   - libjpeg-turbo
+   - libXinerama1
+   - libxkbcommon-devel
+   - libxkbcommon-x11-devel
+   - libXrandr2
+   - pam-devel
+   - pkgconf
+   - xcb-util-image-devel
+   - xcb-util-xrm-devel
